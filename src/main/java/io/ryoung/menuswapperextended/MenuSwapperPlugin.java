@@ -43,7 +43,7 @@ public class MenuSwapperPlugin extends Plugin
 		return configManager.getConfig(MenuSwapperConfig.class);
 	}
 
-	@Subscribe
+	@Subscribe(priority = 10)
 	public void onMenuEntryAdded(MenuEntryAdded event)
 	{
 		if (client.getGameState() != GameState.LOGGED_IN)
@@ -65,9 +65,28 @@ public class MenuSwapperPlugin extends Plugin
 
 		if (option.equals("talk-to"))
 		{
-			if (config.swapStory())
+			if (config.swapPlank() && target.equals("sawmill operator"))
+			{
+				swap("buy-plank", option, target, true);
+			}
+
+			if (config.swapMinigames())
 			{
 				swap("story", option, target, true);
+				swap("start-minigame", option, target, true);
+				swap("dream", option, target, true);
+				swap("escort", option, target, true);
+			}
+		}
+		else if (config.swapSearch() && (option.equals("close") || option.equals("shut")))
+		{
+			swap("search", option, target, true);
+		}
+		else if (option.equals("attack"))
+		{
+			if (config.swapStun() && target.contains("hoop snake"))
+			{
+				swap("stun", option, target, true);
 			}
 		}
 	}
