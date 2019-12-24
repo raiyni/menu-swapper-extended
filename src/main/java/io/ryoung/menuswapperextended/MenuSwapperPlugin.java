@@ -62,6 +62,14 @@ public class MenuSwapperPlugin extends Plugin
 		{
 			return;
 		}
+
+		if (option.equals("talk-to"))
+		{
+			if (config.swapStory())
+			{
+				swap("story", option, target, true);
+			}
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
