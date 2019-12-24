@@ -42,4 +42,70 @@ public class MenuSwapperPlugin extends Plugin
 	{
 		return configManager.getConfig(MenuSwapperConfig.class);
 	}
+
+	@Subscribe
+	public void onMenuEntryAdded(MenuEntryAdded event)
+	{
+		if (client.getGameState() != GameState.LOGGED_IN)
+		{
+			return;
+		}
+
+		final int eventId = event.getIdentifier();
+		final String option = Text.removeTags(event.getOption()).toLowerCase();
+		final String target = Text.removeTags(event.getTarget()).toLowerCase();
+		final NPC hintArrowNpc = client.getHintArrowNpc();
+
+		if (hintArrowNpc != null
+			&& hintArrowNpc.getIndex() == eventId
+			&& NPC_MENU_TYPES.contains(MenuAction.of(event.getType())))
+		{
+			return;
+		}
+	}
+
+	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
+	{
+		for (int i = entries.length - 1; i >= 0; i--)
+		{
+			MenuEntry entry = entries[i];
+			String entryOption = Text.removeTags(entry.getOption()).toLowerCase();
+			String entryTarget = Text.removeTags(entry.getTarget()).toLowerCase();
+
+			if (strict)
+			{
+				if (entryOption.equals(option) && entryTarget.equals(target))
+				{
+					return i;
+				}
+			}
+			else
+			{
+				if (entryOption.contains(option.toLowerCase()) && entryTarget.equals(target))
+				{
+					return i;
+				}
+			}
+		}
+
+		return -1;
+	}
+
+	private void swap(String optionA, String optionB, String target, boolean strict)
+	{
+		MenuEntry[] entries = client.getMenuEntries();
+
+		int idxA = searchIndex(entries, optionA, target, strict);
+		int idxB = searchIndex(entries, optionB, target, strict);
+
+		if (idxA >= 0 && idxB >= 0)
+		{
+			MenuEntry entry = entries[idxA];
+			entries[idxA] = entries[idxB];
+			entries[idxB] = entry;
+
+			client.setMenuEntries(entries);
+		}
+	}
 }
+
