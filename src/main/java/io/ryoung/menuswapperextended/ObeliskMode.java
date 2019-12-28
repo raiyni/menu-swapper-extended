@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2019, Ron Young <https://github.com/raiyni>
+ * Copyright (c) 2018, CaraPis <https://github.com/CaraPis>
  * All rights reserved.
  *
- *  Redistribution and use in source and binary forms, with or without
- *  modification, are permitted provided that the following conditions are met:
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *     list of conditions and the following disclaimer.
+ *    list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *     this list of conditions and the following disclaimer in the documentation
- *     and/or other materials provided with the distribution.
+ *    this list of conditions and the following disclaimer in the documentation
+ *    and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -25,14 +25,22 @@
 
 package io.ryoung.menuswapperextended;
 
-import net.runelite.client.RuneLite;
-import net.runelite.client.externalplugins.ExternalPluginManager;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-public class MenuSwapperPluginTest
+@Getter
+@RequiredArgsConstructor
+public enum ObeliskMode
 {
-	public static void main(String[] args) throws Exception
+	ACTIVATE("Activate"),
+	TELEPORT_TO_DESTINATION("Teleport to destination"),
+	SET_DESTINATION("Set destination");
+
+	private final String name;
+
+	@Override
+	public String toString()
 	{
-		ExternalPluginManager.loadBuiltin(MenuSwapperPlugin.class);
-		RuneLite.main(args);
+		return name;
 	}
 }

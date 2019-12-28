@@ -1,3 +1,28 @@
+/*
+ * Copyright (c) 2019, Ron Young <https://github.com/raiyni>
+ * All rights reserved.
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright notice, this
+ *     list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright notice,
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
+ * ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
 package io.ryoung.menuswapperextended;
 
 import com.google.common.collect.ImmutableSet;
@@ -70,6 +95,11 @@ public class MenuSwapperPlugin extends Plugin
 				swap("buy-plank", option, target, true);
 			}
 
+			if (config.claimDynamite() && target.contains("Thirus"))
+			{
+				swap("claim-dynamite", option, target, true);
+			}
+
 			if (config.swapMinigames())
 			{
 				swap("story", option, target, true);
@@ -77,10 +107,16 @@ public class MenuSwapperPlugin extends Plugin
 				swap("dream", option, target, true);
 				swap("escort", option, target, true);
 			}
-		}
-		else if (config.swapSearch() && (option.equals("close") || option.equals("shut")))
-		{
-			swap("search", option, target, true);
+
+			if (config.swapSendParcel())
+			{
+				swap("send-parcel", option, target, true);
+			}
+
+			if (config.swapZulrahCollect() && target.equals("priestess zul-gwenwynig"))
+			{
+				swap("collect", option, target, true);
+			}
 		}
 		else if (option.equals("attack"))
 		{
@@ -88,6 +124,42 @@ public class MenuSwapperPlugin extends Plugin
 			{
 				swap("stun", option, target, true);
 			}
+		}
+		else if (config.swapSearch() && (option.equals("close") || option.equals("shut")))
+		{
+			swap("search", option, target, true);
+		}
+		else if (config.swapWildernessLever() && option.equals("ardougne") && target.equals("lever"))
+		{
+			swap("edgeville", option, target, true);
+		}
+		else if (target.equals("obelisk"))
+		{
+			switch (config.swapTeleportToDestination())
+			{
+				case SET_DESTINATION:
+					swap("set destination", option, target, true);
+					break;
+				case TELEPORT_TO_DESTINATION:
+					swap("teleport to destination", option, target, true);
+					break;
+			}
+		}
+		else if (config.swapDecant() && target.contains("bob barter"))
+		{
+			swap("decant", option, target, true);
+		}
+		else if (target.equals("zahur"))
+		{
+			swap(config.swapZahur().getOption().toLowerCase(), option, target, false);
+		}
+		else if (config.swapSlayer() && option.equals("standard") && target.contains("kings' ladder"))
+		{
+			swap("slayer", option, target, true);
+		}
+		else if (config.swapStore() && option.equals("trade-general-store"))
+		{
+			swap("trade-builders-store", option, target, true);
 		}
 	}
 
