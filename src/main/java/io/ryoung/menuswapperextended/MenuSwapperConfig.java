@@ -93,7 +93,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		position = 19,
 		keyName = "swapSendParcel",
 		name = "Send Parcel",
 		description = "Swap Talk-To to with Send-Parcel for Rionasta at the Tai Bwo Wannai village."
@@ -104,7 +103,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		position = 19,
 		keyName = "swapTeleportToDestination",
 		name = "Obelisk",
 		description = "Swap Activate with Teleport to Destination or Set Destination"
@@ -115,7 +113,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		position = 19,
 		keyName = "swapZulrahCollect",
 		name = "Collect (Zulrah)",
 		description = "Swap Collect with Talk-to for Priestess Zul-Gwenwynig at Zul-Andra."
@@ -126,7 +123,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		position = 20,
 		keyName = "decant",
 		name = "Decant",
 		description = "Decant for e.g. Bob Barter"
@@ -137,7 +133,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		position = 21,
 		keyName = "zahurOption",
 		name = "Zahur",
 		description = "Zahur default option"
@@ -148,10 +143,9 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		position = 19,
 		keyName = "dagganothKingsLadder",
 		name = "Slayer",
-		description = "Change the default option to slayer in the dagganothkings lair."
+		description = "Change the default option to slayer in the Dagannoth Kings lair."
 	)
 	default boolean swapSlayer()
 	{
