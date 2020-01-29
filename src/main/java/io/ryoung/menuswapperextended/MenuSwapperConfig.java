@@ -161,4 +161,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
+
+	@ConfigItem(
+			keyName = "swapKaramjaGlovesLeftClick",
+			name = "Karamja Gloves",
+			description = "Change the left-click option on Karamja Gloves"
+	)
+	default KaramjaGlovesMode swapKaramjaGlovesLeftClick()
+	{
+		return KaramjaGlovesMode.WEAR;
+	}
 }
