@@ -188,7 +188,7 @@ public class MenuSwapperPlugin extends Plugin
 		{
 			swap("trade-builders-store", option, target, index);
 		}
-		else if (target.startsWith("karamja gloves"))
+		else if (target.startsWith("karamja gloves") && option.equals("wear"))
 		{
 			swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
 		}
