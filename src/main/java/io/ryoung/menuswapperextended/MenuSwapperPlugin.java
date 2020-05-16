@@ -28,6 +28,7 @@ package io.ryoung.menuswapperextended;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.inject.Provides;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
@@ -38,8 +39,11 @@ import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.NPC;
 import net.runelite.api.events.ClientTick;
+import net.runelite.api.events.FocusChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.input.KeyListener;
+import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.util.Text;
@@ -48,7 +52,7 @@ import net.runelite.client.util.Text;
 @PluginDescriptor(
 	name = "Menu Swapper Extended"
 )
-public class MenuSwapperPlugin extends Plugin
+public class MenuSwapperPlugin extends Plugin implements KeyListener
 {
 	private static final Set<MenuAction> NPC_MENU_TYPES = ImmutableSet.of(
 		MenuAction.NPC_FIRST_OPTION,
@@ -64,10 +68,29 @@ public class MenuSwapperPlugin extends Plugin
 	@Inject
 	private MenuSwapperConfig config;
 
+	@Inject
+	private KeyManager keyManager;
+
+	private boolean shiftHeld = false;
+
 	@Provides
 	MenuSwapperConfig provideConfig(ConfigManager configManager)
 	{
 		return configManager.getConfig(MenuSwapperConfig.class);
+	}
+
+	@Subscribe
+	public void onStartup()
+	{
+		shiftHeld = false;
+		keyManager.registerKeyListener(this);
+	}
+
+	@Subscribe
+	public void onShutdown()
+	{
+		shiftHeld = false;
+		keyManager.unregisterKeyListener(this);
 	}
 
 	private final ArrayListMultimap<String, Integer> optionIndexes = ArrayListMultimap.create();
@@ -189,11 +212,11 @@ public class MenuSwapperPlugin extends Plugin
 		{
 			swap("slayer", option, target, index);
 		}
-		else if (target.startsWith("karamja gloves") && option.equals("wear"))
+		else if (!shiftHeld && target.startsWith("karamja gloves") && option.equals("wear"))
 		{
 			swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
 		}
-		else if (config.swapConsCape() && (option.equals("teleport")) && (target.startsWith("construct. cape")))
+		else if (!shiftHeld && config.swapConsCape() && (option.equals("teleport")) && (target.startsWith("construct. cape")))
 		{
 			swap("tele to poh", option, target, index);
 		}
@@ -317,6 +340,38 @@ public class MenuSwapperPlugin extends Plugin
 			entries[idxB] = entry;
 
 			client.setMenuEntries(entries);
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		if (e.getKeyCode() == KeyEvent.VK_SHIFT)
+		{
+			shiftHeld = true;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		if (e.getKeyCode() == KeyEvent.VK_SHIFT)
+		{
+			shiftHeld = false;
+		}
+	}
+
+	@Subscribe
+	public void onFocusChanged(FocusChanged event)
+	{
+		if (!event.isFocused())
+		{
+			shiftHeld = false;
 		}
 	}
 }
