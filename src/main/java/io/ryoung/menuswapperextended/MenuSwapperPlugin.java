@@ -144,6 +144,11 @@ public class MenuSwapperPlugin extends Plugin
 			{
 				swap("collect", option, target, index);
 			}
+
+			if (config.swapStore())
+			{
+				swap("trade-builders-store", option, target, index);
+			}
 		}
 		else if (option.equals("attack"))
 		{
@@ -183,10 +188,6 @@ public class MenuSwapperPlugin extends Plugin
 		else if (config.swapSlayer() && option.equals("standard") && target.contains("kings' ladder"))
 		{
 			swap("slayer", option, target, index);
-		}
-		else if (config.swapStore() && option.equals("trade-general-store"))
-		{
-			swap("trade-builders-store", option, target, index);
 		}
 		else if (target.startsWith("karamja gloves") && option.equals("wear"))
 		{
