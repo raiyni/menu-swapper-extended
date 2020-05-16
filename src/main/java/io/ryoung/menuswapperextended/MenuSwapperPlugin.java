@@ -192,9 +192,9 @@ public class MenuSwapperPlugin extends Plugin
 		{
 			swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
 		}
-		else if (config.swapConsCape() && (option.equals("teleport")) && (target.startsWith(“Construct. Cape”)))
+		else if (config.swapConsCape() && (option.equals("teleport")) && (target.startsWith("Construct. Cape")))
 		{
-			swap("tele to poh", option, target, index);
+			swap("tele to POH", option, target, index);
 		}
 	}
 
