@@ -171,4 +171,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return KaramjaGlovesMode.WEAR;
 	}
+	
+	@ConfigItem(
+			keyName = "swapConsCape",
+			name = "Construction Cape",
+			description = "Change the left-click option on Construction Cape"
+	)
+	default boolean swapConsCape()
+	{
+		return true;
+	}
 }
