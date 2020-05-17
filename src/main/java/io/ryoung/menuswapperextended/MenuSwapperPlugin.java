@@ -196,18 +196,6 @@ public class MenuSwapperPlugin extends Plugin
 		{
 			swap("tele to POH", option, target, index);
 		}
-		else if (config.swapTeleCrsytal() && option.equals("lletya"))
-		{
-			swap("prifddinas", option, target, index);
-		}
-		else if (config.swapMythCape() && option.equals("teleport") && target.startsWith("Mythical"))
-		{
-			swap("wear", option, target, index);
-		}
-		else if (config.swapRadaBless() && option.equals("wear") && target.startsWith("Rada's blessing"))
-		{
-			swap("Mount Karuulm", option, target, index);
-		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
