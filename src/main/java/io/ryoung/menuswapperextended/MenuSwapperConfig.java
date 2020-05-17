@@ -181,31 +181,4 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
-	@ConfigItem(
-			keyName = "swapTeleCrystal",
-			name = "Teleport Crystal",
-			description = "Swaps the Crystal Seed Teleport to Prifddinas"
-	)
-	default boolean swapTeleCrystal()
-	{
-		return true;
-	}
-	@ConfigItem(
-			keyName = "swapMythCape",
-			name = "Mythical Cape",
-			description = "Reverts Mythical Cape's Left click to wear"
-	)
-	default boolean swapMythCape()
-	{
-		return true;
-	}
-	@ConfigItem(
-			keyName = "swapRadaBless",
-			name = "Rada's Blessing",
-			description = "Changes Rada's Blessing Left click to Mount Karuulm"
-	)
-	default boolean swapRadaBless()
-	{
-		return true;
-	}
 }
