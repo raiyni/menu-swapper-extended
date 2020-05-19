@@ -191,4 +191,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
+	
+	@ConfigItem(
+			keyName = "swapWestBanner",
+			name = "Western Banner",
+			description = "Change the left-click option on the Western Banner"
+	)
+	default boolean swapWestBanner()
+	{
+		return true;
+	}
 }
