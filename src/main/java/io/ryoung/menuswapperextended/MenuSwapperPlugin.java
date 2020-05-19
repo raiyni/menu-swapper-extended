@@ -220,11 +220,11 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("tele to poh", option, target, index);
 		}
-		else if (!shiftHeld && config.swapCraftCape() && (option.equals("teleport")) && (target.startsWith("crafting cape")))
+		else if (!shiftHeld && config.swapCraftCape() && (option.equals("wear")) && (target.startsWith("crafting cape")))
 		{
 			swap("teleport", option, target, index);
 		}
-		else if (!shiftHeld && config.swapWestBanner() && (option.equals("teleport")) && (target.startsWith("western banner")))
+		else if (!shiftHeld && config.swapWestBanner() && (option.equals("wield")) && (target.startsWith("western banner")))
 		{
 			swap("teleport", option, target, index);
 		}
