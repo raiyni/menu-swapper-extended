@@ -220,6 +220,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("tele to poh", option, target, index);
 		}
+		else if (!shiftHeld && config.swapCraftCape() && (option.equals("teleport")) && (target.startsWith("crafting cape")))
+		{
+			swap("teleport", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
