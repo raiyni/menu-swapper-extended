@@ -181,4 +181,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
+	
+	@ConfigItem(
+			keyName = "swapCraftCape",
+			name = "Crafting Cape",
+			description = "Change the left-click option on the Crafting Cape"
+	)
+	default boolean swapCraftCape()
+	{
+		return true;
+	}
 }
