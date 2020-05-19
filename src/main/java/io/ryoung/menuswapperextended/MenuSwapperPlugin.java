@@ -224,6 +224,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("teleport", option, target, index);
 		}
+		else if (!shiftHeld && config.swapWestBanner() && (option.equals("teleport")) && (target.startsWith("western banner")))
+		{
+			swap("teleport", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
