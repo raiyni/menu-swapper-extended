@@ -216,7 +216,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
 		}
-		else if (!shiftHeld && config.swapConsCape() && (option.equals("teleport")) && (target.startsWith("construct. cape")))
+		else if (!shiftHeld && config.swapConsCape() && (option.equals("wear")) && (target.startsWith("construct. cape")))
 		{
 			swap("tele to poh", option, target, index);
 		}
