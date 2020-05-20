@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 public enum PharaohScreptreMode
 {
 	JALSAVRAH("Jalsavrah"),
-  WEAR("Wear"),
+ 	 WEAR("Wear"),
 	JALEUSTROPHOS("Jaleustrophos"),
 	JALDRAOCHT("Jaldraocht");
 
