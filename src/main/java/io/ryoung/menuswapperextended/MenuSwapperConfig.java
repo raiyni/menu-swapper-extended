@@ -181,4 +181,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
+	@ConfigItem(
+			keyName = "swapTeleCrystal",
+			name = "Teleport Crystal",
+			description = "Swaps the Crystal Seed Teleport to Prifddinas"
+	)
+	default boolean swapTeleCrystal()
+	{
+		return true;
+	}
+
 }
