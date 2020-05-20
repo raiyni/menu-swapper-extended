@@ -220,6 +220,11 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("tele to poh", option, target, index);
 		}
+		else if (!shiftHeld && config.swapTeleCrsytal() && option.equals("lletya"))
+		{
+			swap("prifddinas", option, target, index);
+		}
+
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
