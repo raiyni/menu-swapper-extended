@@ -190,5 +190,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
-
+	@ConfigItem(
+			keyName = "swapPharaohSceptreLeftClick",
+			name = "Pharaoh's Sceptre",
+			description = "Change the left-click option on Pharaoh Sceptre"
+	)
+	default PharaohSceptreMode swapPharaohSceptreLeftClick()
+	{
+		return PharaohSceptreMode.JALSAVRAH;
+	}
 }
