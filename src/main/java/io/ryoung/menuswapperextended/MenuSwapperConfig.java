@@ -188,7 +188,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapTeleCrystal()
 	{
-		return true;
+		return false;
 	}
 	@ConfigItem(
 			keyName = "swapPharaohSceptreLeftClick",
