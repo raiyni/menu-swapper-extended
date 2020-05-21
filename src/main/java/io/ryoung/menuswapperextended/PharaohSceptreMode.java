@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Henry Darnell <https://github.com/hjdarnel>
+ * Copyright (c) 2020, Vitorebom
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
