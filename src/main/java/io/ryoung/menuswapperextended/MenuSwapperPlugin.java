@@ -79,15 +79,15 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		return configManager.getConfig(MenuSwapperConfig.class);
 	}
 
-	@Subscribe
-	public void onStartup()
+	@Override
+	public void startUp()
 	{
 		shiftHeld = false;
 		keyManager.registerKeyListener(this);
 	}
 
-	@Subscribe
-	public void onShutdown()
+	@Override
+	public void shutDown()
 	{
 		shiftHeld = false;
 		keyManager.unregisterKeyListener(this);
@@ -216,7 +216,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
 		}
-		else if (!shiftHeld && config.swapConsCape() && (option.equals("teleport")) && (target.startsWith("construct. cape")))
+		else if (!shiftHeld && config.swapConsCape() && (option.equals("wear")) && (target.startsWith("construct. cape")))
 		{
 			swap("tele to poh", option, target, index);
 		}
