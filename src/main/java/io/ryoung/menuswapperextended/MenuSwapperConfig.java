@@ -181,4 +181,22 @@ public interface MenuSwapperConfig extends Config
 	{
 		return true;
 	}
+	@ConfigItem(
+			keyName = "swapTeleCrystal",
+			name = "Teleport Crystal",
+			description = "Swaps the Crystal Seed Teleport to Prifddinas"
+	)
+	default boolean swapTeleCrystal()
+	{
+		return false;
+	}
+	@ConfigItem(
+			keyName = "swapPharaohSceptreLeftClick",
+			name = "Pharaoh's Sceptre",
+			description = "Change the left-click option on Pharaoh Sceptre"
+	)
+	default PharaohSceptreMode swapPharaohSceptreLeftClick()
+	{
+		return PharaohSceptreMode.JALSAVRAH;
+	}
 }
