@@ -33,131 +33,11 @@ import net.runelite.client.config.ConfigItem;
 public interface MenuSwapperConfig extends Config
 {
 	@ConfigItem(
-		keyName = "swapMinigames",
-		name = "Minigames",
-		description = "Swap Talk-to with actions that start Minigames"
-	)
-	default boolean swapMinigames()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "swapSearch",
-		name = "Search",
-		description = "Swap Close, Shut with Search on chests, cupboards, etc."
-	)
-	default boolean swapSearch()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "swapBuyPlank",
-		name = "Buy-Plank",
-		description = "Swap Talk-to with Buy-Plank on Sawmill Operator"
-	)
-	default boolean swapPlank()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "swapStun",
-		name = "Stun Hoop Snakes",
-		description = "Swap Attack with Stun"
-	)
-	default boolean swapStun()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "claimDynamite",
-		name = "Claim Dynamite",
-		description = "Swap Talk-to with Claim Dynamite on Thirus"
-	)
-	default boolean claimDynamite()
-	{
-		return true;
-	}
-
-	@ConfigItem(
 		keyName = "swapWildernessLever",
 		name = "Wilderness Lever to Edgeville",
 		description = "Swap Edgeville Lever as default for wilderness lever"
 	)
 	default boolean swapWildernessLever()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "swapSendParcel",
-		name = "Send Parcel",
-		description = "Swap Talk-To to with Send-Parcel for Rionasta at the Tai Bwo Wannai village."
-	)
-	default boolean swapSendParcel()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		keyName = "swapTeleportToDestination",
-		name = "Obelisk",
-		description = "Swap Activate with Teleport to Destination or Set Destination"
-	)
-	default ObeliskMode swapTeleportToDestination()
-	{
-		return ObeliskMode.ACTIVATE;
-	}
-
-	@ConfigItem(
-		keyName = "swapZulrahCollect",
-		name = "Collect (Zulrah)",
-		description = "Swap Collect with Talk-to for Priestess Zul-Gwenwynig at Zul-Andra."
-	)
-	default boolean swapZulrahCollect()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "decant",
-		name = "Decant",
-		description = "Decant for e.g. Bob Barter"
-	)
-	default boolean swapDecant()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "zahurOption",
-		name = "Zahur",
-		description = "Zahur default option"
-	)
-	default ZahurMode swapZahur()
-	{
-		return ZahurMode.MAKE_POTION;
-	}
-
-	@ConfigItem(
-		keyName = "dagganothKingsLadder",
-		name = "Slayer",
-		description = "Change the default option to slayer in the Dagannoth Kings lair."
-	)
-	default boolean swapSlayer()
-	{
-		return true;
-	}
-
-	@ConfigItem(
-		keyName = "swapStore",
-		name = "Builders Store",
-		description = "Swap Trade-General-Store with Trade-Builders-Store for the NPC Razmire Keelgan"
-	)
-	default boolean swapStore()
 	{
 		return true;
 	}
@@ -196,6 +76,24 @@ public interface MenuSwapperConfig extends Config
 			keyName = "swapWestBanner",
 			name = "Western Banner",
 			description = "Change the left-click option on the Western Banner"
+	)
+	default boolean swapWestBanner()
+	{
+		return true;
+	}
+	@ConfigItem(
+			keyName = "swapDesertAmmy",
+			name = "Desert Amulet",
+			description = "Change the left-click option on the Desert Amulet"
+	)
+	default boolean swapDesertAmmy()
+	{
+		return true;
+	}
+	@ConfigItem(
+			keyName = "swapQPC",
+			name = "Quest Point Cape",
+			description = "Change the left-click option on the QPC"
 	)
 	default boolean swapWestBanner()
 	{
