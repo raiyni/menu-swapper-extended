@@ -228,6 +228,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapPharaohSceptreLeftClick().getOption().toLowerCase(), option, target, index);
 		}
+			else if (!shiftHeld && target.startsWith("desert amulet") && option.equals("wear"))
+		{
+			swap(config.swapDesertAmuletLeftClick().getOption().toLowerCase(), option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
