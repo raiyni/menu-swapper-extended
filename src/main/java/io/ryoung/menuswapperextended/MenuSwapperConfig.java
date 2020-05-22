@@ -199,4 +199,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return PharaohSceptreMode.JALSAVRAH;
 	}
+	@ConfigItem(
+			keyName = "swapDesertAmuletLeftClick",
+			name = "Desert Amulet",
+			description = "Change the left-click option on Desert Amulet"
+	)
+	default DesertAmuletMode swapDesertAmuletLeftClick()
+	{
+		return DesertAmuletMode.WEAR;
+	}
 }
