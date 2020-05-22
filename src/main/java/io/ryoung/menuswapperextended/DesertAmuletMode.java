@@ -33,7 +33,7 @@ public enum DesertAmuletMode
 {
  	WEAR("Wear"),
 	NARDAH("Nardah"),
-	KALPHITE CAVE("Kalphite cave");
+	KALPHITE_CAVE("Kalphite cave");
 
 	private final String option;
 
