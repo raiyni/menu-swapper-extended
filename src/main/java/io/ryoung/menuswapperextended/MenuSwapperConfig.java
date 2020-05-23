@@ -211,4 +211,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return DesertAmuletMode.WEAR;
 	}
+	@ConfigItem(
+			keyName = "swapArdougneCloakLeftClick",
+			name = "Ardougne Cloak",
+			description = "Change the left-click option on Ardougne Cloak"
+	)
+	default DesertAmuletMode swapArdougneCloakLeftClick()
+	{
+		return ArdougneCloakMode.WEAR;
+	}
 }
