@@ -232,6 +232,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapDesertAmuletLeftClick().getOption().toLowerCase(), option, target, index);
 		}
+		else if (!shiftHeld && target.startsWith("ardougne cloak") && option.equals("wear"))
+		{
+			swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
