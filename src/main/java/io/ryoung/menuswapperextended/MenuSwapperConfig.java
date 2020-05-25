@@ -211,24 +211,34 @@ public interface MenuSwapperConfig extends Config
 	{
 		return DesertAmuletMode.WEAR;
 	}
-  
+
 	@ConfigItem(
-			keyName = "swapMorytaniaLegsLeftClick",
-			name = "Morytania Legs",
-			description = "Change the left-click option on Morytania Legs"
+		keyName = "swapMorytaniaLegsLeftClick",
+		name = "Morytania Legs",
+		description = "Change the left-click option on Morytania Legs"
 	)
 	default MorytaniaLegsMode swapMorytaniaLegsLeftClick()
 	{
 		return MorytaniaLegsMode.WEAR;
-  }
+	}
 
 	@ConfigItem(
 		keyName = "swapArdougneCloakLeftClick",
 		name = "Ardougne Cloak",
 		description = "Change the left-click option on Ardougne Cloak"
 	)
-	default ArdougnCloakMode swapArdougneCloakLeftClick()
+	default ArdougneCloakMode swapArdougneCloakLeftClick()
 	{
 		return ArdougneCloakMode.WEAR;
+	}
+
+	@ConfigItem(
+		keyName = "swapTraderCrewmemberLeftClick",
+		name = "Charter Ships",
+		description = "Change the left-click option on Trader Crewmembers on Charter ships"
+	)
+	default CharterShipsMode swapTraderCrewmemberLeftClick()
+	{
+		return CharterShipsMode.LAST_DESTINATION;
 	}
 }
