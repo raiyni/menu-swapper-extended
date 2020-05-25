@@ -208,4 +208,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return DesertAmuletMode.WEAR;
 	}
+	@ConfigItem(
+			keyName = "swapMorytaniaLegsLeftClick",
+			name = "Morytania Legs",
+			description = "Change the left-click option on Morytania Legs"
+	)
+	default MorytaniaLegsMode swapMorytaniaLegsLeftClick()
+	{
+		return MorytaniaLegsMode.WEAR;
+	}
 }
