@@ -147,7 +147,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 
 			if (config.claimDynamite() && target.contains("Thirus"))
 			{
-				swap("claim-dynamite", option, target, index);
+				swap("claim", option, target, index);
 			}
 
 			if (config.swapMinigames())
