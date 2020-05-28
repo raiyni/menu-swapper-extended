@@ -231,4 +231,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return ArdougneCloakMode.WEAR;
 	}
+
+	@ConfigItem(
+		keyName = "swapTraderCrewmemberLeftClick",
+		name = "Charter Ships",
+		description = "Change the left-click option on Trader Crewmembers on Charter ships"
+	)
+	default CharterShipsMode swapTraderCrewmemberLeftClick()
+	{
+		return CharterShipsMode.LAST_DESTINATION;
+	}
 }

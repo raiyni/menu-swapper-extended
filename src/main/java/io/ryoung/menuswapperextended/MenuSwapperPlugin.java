@@ -232,6 +232,19 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapDesertAmuletLeftClick().getOption().toLowerCase(), option, target, index);
 		}
+		else if (!shiftHeld && target.startsWith("trader crewmember"))
+		{
+			CharterShipsMode configOption = config.swapTraderCrewmemberLeftClick();
+			if (configOption == CharterShipsMode.LAST_DESTINATION)
+			{
+				swap("charter-to", option, target, index, false);
+			}
+			else
+			{
+				// NOTE: Selecting Talk-To conflicts with Runelites own Menu entry swappers options "Trade" and "Travel"
+				swap(configOption.getOption().toLowerCase(), option, target, index);
+			}
+		}
 		else if (!shiftHeld && target.startsWith("morytania legs") && option.equals("wear"))
 		{
 			swap(config.swapMorytaniaLegsLeftClick().getOption().toLowerCase(), option, target, index);
