@@ -221,13 +221,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return MorytaniaLegsMode.WEAR;
   }
-  
-  @ConfigItem(
-			keyName = "swapArdougneCloakLeftClick",
-			name = "Ardougne Cloak",
-			description = "Change the left-click option on Ardougne Cloak"
+
+	@ConfigItem(
+		keyName = "swapArdougneCloakLeftClick",
+		name = "Ardougne Cloak",
+		description = "Change the left-click option on Ardougne Cloak"
 	)
-	default ArdougneCloakMode swapArdougneCloakLeftClick()
+	default ArdougnCloakMode swapArdougneCloakLeftClick()
 	{
 		return ArdougneCloakMode.WEAR;
 	}
