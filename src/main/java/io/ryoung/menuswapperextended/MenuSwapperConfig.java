@@ -241,4 +241,22 @@ public interface MenuSwapperConfig extends Config
 	{
 		return CharterShipsMode.LAST_DESTINATION;
 	}
+	@ConfigItem(
+			keyName = "swapMasterScrollBook",
+			name = "Master Scroll Book",
+			description = "Swaps the Master Scroll Book left click to open"
+	)
+	default boolean swapMasterScrollBook()
+	{
+		return false;
+	}
+	@ConfigItem(
+			keyName = "swapSkullSceptre",
+			name = "Skull Screptre",
+			description = "Makes Invoke the left click option on Skull Sceptre"
+	)
+	default boolean swapSkullSceptre)
+	{
+		return false;
+	}
 }
