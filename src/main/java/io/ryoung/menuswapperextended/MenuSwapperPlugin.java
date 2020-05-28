@@ -173,6 +173,29 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				swap("trade-builders-store", option, target, index);
 			}
 		}
+		else if (!shiftHeld && option.equals("wear"))
+		{
+			if (config.swapConsCape() && (target.startsWith("construct. cape")))
+			{
+				swap("tele to poh", option, target, index);
+			}
+			else if (target.startsWith("karamja gloves"))
+			{
+				swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
+			}
+			else if (target.startsWith("desert amulet"))
+			{
+				swap(config.swapDesertAmuletLeftClick().getOption().toLowerCase(), option, target, index);
+			}
+			else if (target.startsWith("morytania legs"))
+			{
+				swap(config.swapMorytaniaLegsLeftClick().getOption().toLowerCase(), option, target, index);
+			}
+			else if (target.startsWith("ardougne cloak"))
+			{
+				swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
+			}
+		}
 		else if (option.equals("attack"))
 		{
 			if (config.swapStun() && target.contains("hoop snake"))
@@ -212,14 +235,6 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("slayer", option, target, index);
 		}
-		else if (!shiftHeld && target.startsWith("karamja gloves") && option.equals("wear"))
-		{
-			swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
-		}
-		else if (!shiftHeld && config.swapConsCape() && (option.equals("wear")) && (target.startsWith("construct. cape")))
-		{
-			swap("tele to poh", option, target, index);
-		}
 		else if (!shiftHeld && config.swapTeleCrystal() && option.equals("lletya"))
 		{
 			swap("prifddinas", option, target, index);
@@ -227,10 +242,6 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		else if (!shiftHeld && target.startsWith("pharaoh's sceptre") && option.equals("jalsavrah"))
 		{
 			swap(config.swapPharaohSceptreLeftClick().getOption().toLowerCase(), option, target, index);
-		}
-		else if (!shiftHeld && target.startsWith("desert amulet") && option.equals("wear"))
-		{
-			swap(config.swapDesertAmuletLeftClick().getOption().toLowerCase(), option, target, index);
 		}
 		else if (!shiftHeld && target.startsWith("trader crewmember"))
 		{
@@ -244,14 +255,6 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				// NOTE: Selecting Talk-To conflicts with Runelites own Menu entry swappers options "Trade" and "Travel"
 				swap(configOption.getOption().toLowerCase(), option, target, index);
 			}
-		}
-		else if (!shiftHeld && target.startsWith("morytania legs") && option.equals("wear"))
-		{
-			swap(config.swapMorytaniaLegsLeftClick().getOption().toLowerCase(), option, target, index);
-		}
-		else if (!shiftHeld && target.startsWith("ardougne cloak") && option.equals("wear"))
-		{
-			swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
 		}
 	}
 
