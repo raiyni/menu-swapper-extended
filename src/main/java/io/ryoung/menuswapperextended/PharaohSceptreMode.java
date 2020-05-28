@@ -29,10 +29,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PharaohScreptreMode
+public enum PharaohSceptreMode
 {
 	JALSAVRAH("Jalsavrah"),
- 	 WEAR("Wear"),
+	WEAR("Wear"),
 	JALEUSTROPHOS("Jaleustrophos"),
 	JALDRAOCHT("Jaldraocht");
 
