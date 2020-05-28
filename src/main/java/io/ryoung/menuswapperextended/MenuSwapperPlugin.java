@@ -256,6 +256,14 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				swap(configOption.getOption().toLowerCase(), option, target, index);
 			}
 		}
+		else if (!shiftHeld && config.swapSkullSceptre() && option.equals("wield") && target.startsWith("skull sceptre"))
+		{
+			swap("invoke", option, target, index);
+		}
+		else if (!shiftHeld && config.swapMasterScrollBook() && option.equals("teleport") && target.startsWith("master scroll book"))
+		{
+			swap("open", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
