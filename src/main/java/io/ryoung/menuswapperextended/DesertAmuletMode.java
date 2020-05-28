@@ -31,7 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum DesertAmuletMode
 {
- 	WEAR("Wear"),
+	WEAR("Wear"),
 	NARDAH("Nardah"),
 	KALPHITE_CAVE("Kalphite cave");
 

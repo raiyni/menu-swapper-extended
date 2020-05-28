@@ -147,7 +147,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 
 			if (config.claimDynamite() && target.contains("Thirus"))
 			{
-				swap("claim-dynamite", option, target, index);
+				swap("claim", option, target, index);
 			}
 
 			if (config.swapMinigames())
@@ -220,7 +220,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("tele to poh", option, target, index);
 		}
-		else if (!shiftHeld && config.swapTeleCrsytal() && option.equals("lletya"))
+		else if (!shiftHeld && config.swapTeleCrystal() && option.equals("lletya"))
 		{
 			swap("prifddinas", option, target, index);
 		}
@@ -235,6 +235,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		else if (!shiftHeld && target.startsWith("morytania legs") && option.equals("wear"))
 		{
 			swap(config.swapMorytaniaLegsLeftClick().getOption().toLowerCase(), option, target, index);
+    }
+		else if (!shiftHeld && target.startsWith("ardougne cloak") && option.equals("wear"))
+		{
+			swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
 		}
 	}
 

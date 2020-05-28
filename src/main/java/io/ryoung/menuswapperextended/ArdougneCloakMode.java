@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, Vitorebom
+ * Copyright (c) 2020, SomeZer0
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,12 +29,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PharaohSceptreMode
+public enum ArdougneCloakMode
 {
-	JALSAVRAH("Jalsavrah"),
-	WEAR("Wear"),
-	JALEUSTROPHOS("Jaleustrophos"),
-	JALDRAOCHT("Jaldraocht");
+ 	WEAR("Wear"),
+	MONASTERY_TELEPORT("Monastery Teleport"),
+	FARM_TELEPORT("Farm Teleport");
 
 	private final String option;
 

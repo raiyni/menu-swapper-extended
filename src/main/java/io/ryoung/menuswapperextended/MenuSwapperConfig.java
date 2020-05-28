@@ -163,51 +163,55 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "swapKaramjaGlovesLeftClick",
-			name = "Karamja Gloves",
-			description = "Change the left-click option on Karamja Gloves"
+		keyName = "swapKaramjaGlovesLeftClick",
+		name = "Karamja Gloves",
+		description = "Change the left-click option on Karamja Gloves"
 	)
 	default KaramjaGlovesMode swapKaramjaGlovesLeftClick()
 	{
 		return KaramjaGlovesMode.WEAR;
 	}
-	
+
 	@ConfigItem(
-			keyName = "swapConsCape",
-			name = "Construction Cape",
-			description = "Change the left-click option on Construction Cape"
+		keyName = "swapConsCape",
+		name = "Construction Cape",
+		description = "Change the left-click option on Construction Cape"
 	)
 	default boolean swapConsCape()
 	{
 		return true;
 	}
+
 	@ConfigItem(
-			keyName = "swapTeleCrystal",
-			name = "Teleport Crystal",
-			description = "Swaps the Crystal Seed Teleport to Prifddinas"
+		keyName = "swapTeleCrystal",
+		name = "Teleport Crystal",
+		description = "Swaps the Crystal Seed Teleport to Prifddinas"
 	)
 	default boolean swapTeleCrystal()
 	{
 		return false;
 	}
+
 	@ConfigItem(
-			keyName = "swapPharaohSceptreLeftClick",
-			name = "Pharaoh's Sceptre",
-			description = "Change the left-click option on Pharaoh Sceptre"
+		keyName = "swapPharaohSceptreLeftClick",
+		name = "Pharaoh's Sceptre",
+		description = "Change the left-click option on Pharaoh Sceptre"
 	)
 	default PharaohSceptreMode swapPharaohSceptreLeftClick()
 	{
 		return PharaohSceptreMode.JALSAVRAH;
 	}
+
 	@ConfigItem(
-			keyName = "swapDesertAmuletLeftClick",
-			name = "Desert Amulet",
-			description = "Change the left-click option on Desert Amulet"
+		keyName = "swapDesertAmuletLeftClick",
+		name = "Desert Amulet",
+		description = "Change the left-click option on Desert Amulet"
 	)
 	default DesertAmuletMode swapDesertAmuletLeftClick()
 	{
 		return DesertAmuletMode.WEAR;
 	}
+  
 	@ConfigItem(
 			keyName = "swapMorytaniaLegsLeftClick",
 			name = "Morytania Legs",
@@ -216,5 +220,15 @@ public interface MenuSwapperConfig extends Config
 	default MorytaniaLegsMode swapMorytaniaLegsLeftClick()
 	{
 		return MorytaniaLegsMode.WEAR;
+  }
+  
+  @ConfigItem(
+			keyName = "swapArdougneCloakLeftClick",
+			name = "Ardougne Cloak",
+			description = "Change the left-click option on Ardougne Cloak"
+	)
+	default DesertAmuletMode swapArdougneCloakLeftClick()
+	{
+		return ArdougneCloakMode.WEAR;
 	}
 }
