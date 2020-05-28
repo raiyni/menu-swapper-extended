@@ -144,10 +144,10 @@ public interface MenuSwapperConfig extends Config
 
 	@ConfigItem(
 		keyName = "dagganothKingsLadder",
-		name = "Slayer",
+		name = "Dagganoth King Ladder",
 		description = "Change the default option to slayer in the Dagannoth Kings lair."
 	)
-	default boolean swapSlayer()
+	default boolean dagganothKingsLadder()
 	{
 		return true;
 	}

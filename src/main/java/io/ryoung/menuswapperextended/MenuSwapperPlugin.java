@@ -231,7 +231,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapZahur().getOption().toLowerCase(), option, target, index);
 		}
-		else if (config.swapSlayer() && option.equals("standard") && target.contains("kings' ladder"))
+		else if (config.dagganothKingsLadder() && option.equals("standard") && target.contains("kings' ladder"))
 		{
 			swap("slayer", option, target, index);
 		}
