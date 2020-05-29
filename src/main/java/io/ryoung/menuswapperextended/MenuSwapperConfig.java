@@ -241,4 +241,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return CharterShipsMode.LAST_DESTINATION;
 	}
+	@ConfigItem(
+		keyName = "swapRadasBlessingLeftClick",
+		name = "Rada's Blessing",
+		description = "Change the left-click option on Rada's Blessing"
+	)
+	default RadasBlessingMode swapRadasBlessingLeftClick()
+	{
+		return RadasBlessingMode.EQUIP;
+	}
 }
