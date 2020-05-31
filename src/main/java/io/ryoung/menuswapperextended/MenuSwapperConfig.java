@@ -241,4 +241,12 @@ public interface MenuSwapperConfig extends Config
 	{
 		return CharterShipsMode.LAST_DESTINATION;
 	}
+	@ConfigItem(
+		keyName = "swapSpellbookSwapLeftClick",
+		name = "Spellbook Swap",
+		description = "Change the left-click option on Spellbook Swap (Lunar Spell)"
+	)
+	default ArdougneCloakMode swapArdougneCloakLeftClick()
+	{
+		return ArdougneCloakMode.CAST;
 }
