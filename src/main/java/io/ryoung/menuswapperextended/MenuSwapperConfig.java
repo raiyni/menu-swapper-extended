@@ -246,7 +246,7 @@ public interface MenuSwapperConfig extends Config
 		name = "Spellbook Swap",
 		description = "Change the left-click option on Spellbook Swap (Lunar Spell)"
 	)
-	default ArdougneCloakMode swapArdougneCloakLeftClick()
+	default SpellbookSwapMode swapSpellbookSwapLeftClick()
 	{
-		return ArdougneCloakMode.CAST;
+		return SpellbookSwapMode.CAST;
 }
