@@ -198,7 +198,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		}
 		else if (!shiftHeld && option.equals("equip"))
 		{
-			if (config.swapRadasBlessingLeftClick() && (target.startsWith("rada's blessing")))
+			if (target.startsWith("rada's blessing"))
 			{
 				swap(config.swapRadasBlessingLeftClick().getOption().toLowerCase(), option, target, index);
 			}
