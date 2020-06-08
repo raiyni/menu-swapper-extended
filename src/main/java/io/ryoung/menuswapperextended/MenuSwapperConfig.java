@@ -241,4 +241,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return CharterShipsMode.TALK;
 	}
+
+	@ConfigItem(
+		keyName = "swapDrakansMedallionLeftClick",
+		name = "Drakan's Medallion",
+		description = "Change the left-click option on Drakan's Medallion"
+	)
+	default DrakansMedallionMode swapDrakansMedallionLeftClick()
+	{
+		return DrakansMedallionMode.WEAR;
+	}
 }

@@ -195,6 +195,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 			{
 				swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
 			}
+			else if (target.startsWith("drakan's medallion"))
+			{
+				swap(config.swapDrakansMedallionLeftClick().getOption().toLowerCase(), option, target, index);
+			}
 		}
 		else if (option.equals("attack"))
 		{
