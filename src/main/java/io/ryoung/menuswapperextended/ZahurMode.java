@@ -31,6 +31,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ZahurMode
 {
+	TALK("Talk-to"
 	COMBINE("Combine"),
 	CLEAN("Clean"),
 	MAKE_POTION("Potion");
