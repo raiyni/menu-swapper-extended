@@ -39,7 +39,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapMinigames()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -49,7 +49,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapSearch()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -59,7 +59,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapPlank()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -69,7 +69,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapStun()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -79,7 +79,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean claimDynamite()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -89,7 +89,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapWildernessLever()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -119,7 +119,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapZulrahCollect()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -129,7 +129,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapDecant()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -149,7 +149,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean dagganothKingsLadder()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -159,7 +159,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapStore()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
@@ -179,7 +179,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default boolean swapConsCape()
 	{
-		return true;
+		return false;
 	}
 
 	@ConfigItem(
