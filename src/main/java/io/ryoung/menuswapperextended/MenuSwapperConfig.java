@@ -139,7 +139,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default ZahurMode swapZahur()
 	{
-		return ZahurMode.MAKE_POTION;
+		return ZahurMode.TALK;
 	}
 
 	@ConfigItem(
@@ -239,6 +239,6 @@ public interface MenuSwapperConfig extends Config
 	)
 	default CharterShipsMode swapTraderCrewmemberLeftClick()
 	{
-		return CharterShipsMode.LAST_DESTINATION;
+		return CharterShipsMode.TALK;
 	}
 }
