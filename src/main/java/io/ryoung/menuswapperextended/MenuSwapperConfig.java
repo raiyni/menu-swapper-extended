@@ -241,4 +241,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return CharterShipsMode.LAST_DESTINATION;
 	}
+	
+	@ConfigItem(
+		keyName = "swapSeedBox",
+		name = "Seed Box",
+		description = "Swaps the Seed Box left-click option from Fill to Check"
+	)
+	default boolean swapSeedBox()
+	{
+		return false;
+	}
 }
