@@ -255,7 +255,7 @@ public interface MenuSwapperConfig extends Config
 			name = "Skull Screptre",
 			description = "Makes Invoke the left click option on Skull Sceptre"
 	)
-	default boolean swapSkullSceptre)
+	default boolean swapSkullSceptre()
 	{
 		return false;
 	}
