@@ -241,4 +241,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return CharterShipsMode.TALK;
 	}
+	
+	@ConfigItem(
+		keyName = "swapBloom",
+		name = "Bloom",
+		description = "Swaps Bloom to be the left-click option on blessed weaponry (while in the inventory)"
+	)
+	default boolean swapBloom()
+	{
+		return false;
+	}
 }

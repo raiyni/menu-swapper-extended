@@ -196,6 +196,13 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
 			}
 		}
+		else if (!shiftHeld && option.equals("wield"))
+		{
+			if (config.swapBloom()
+			{
+				swap("bloom", option, target, index);
+			}
+		}
 		else if (option.equals("attack"))
 		{
 			if (config.swapStun() && target.contains("hoop snake"))
