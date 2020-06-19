@@ -260,6 +260,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				swap(configOption.getOption().toLowerCase(), option, target, index);
 			}
 		}
+		else if (!shiftHeld && target.startsWith("spellbook swap") && option.equals("cast"))
+		{
+			swap(config.swapSpellbookSwapLeftClick().getOption().toLowerCase(), option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
