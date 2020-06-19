@@ -249,4 +249,5 @@ public interface MenuSwapperConfig extends Config
 	default SpellbookSwapMode swapSpellbookSwapLeftClick()
 	{
 		return SpellbookSwapMode.CAST;
+	}
 }
