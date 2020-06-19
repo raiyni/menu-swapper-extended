@@ -145,7 +145,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				swap("buy-plank", option, target, index);
 			}
 
-			if (config.claimDynamite() && target.contains("Thirus"))
+			if (config.claimDynamite() && target.contains("thirus"))
 			{
 				swap("claim", option, target, index);
 			}
