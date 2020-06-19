@@ -172,6 +172,11 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 			{
 				swap("trade-builders-store", option, target, index);
 			}
+
+			if (config.swapGiveSword())
+			{
+				swap("give-sword", option, target, index);
+			}
 		}
 		else if (!shiftHeld && option.equals("wear"))
 		{

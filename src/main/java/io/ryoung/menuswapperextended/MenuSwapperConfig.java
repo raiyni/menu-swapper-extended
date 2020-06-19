@@ -269,4 +269,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return SpellbookSwapMode.CAST;
 	}
+
+	@ConfigItem(
+		keyName = "swapGiveSword",
+		name = "Give Sword",
+		description = "Swaps Talk-To to with Give-Sword for Tindel Marchant at Port Khazard"
+	)
+	default boolean swapGiveSword()
+	{
+		return false;
+	}
 }
