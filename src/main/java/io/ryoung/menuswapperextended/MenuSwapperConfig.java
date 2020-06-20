@@ -251,15 +251,7 @@ public interface MenuSwapperConfig extends Config
 	{
 		return DrakansMedallionMode.WEAR;
 	}
-	@ConfigItem(
-		keyName = "swapSpellbookSwapLeftClick",
-		name = "Spellbook Swap",
-		description = "Change the left-click option on Spellbook Swap (Lunar Spell)"
-	)
-	default SpellbookSwapMode swapSpellbookSwapLeftClick()
-	{
-		return SpellbookSwapMode.CAST;
-	}
+
 	@ConfigItem(
 		keyName = "swapSpellbookSwapLeftClick",
 		name = "Spellbook Swap",
