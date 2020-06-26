@@ -283,6 +283,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("pet", option, target, index);
 		}
+		else if (config.guzzleRockCake() && option.equals("eat") && target.equals("dwarven rock cake"))
+		{
+			swap("guzzle", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
