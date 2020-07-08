@@ -178,6 +178,11 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 			{
 				swap("give-sword", option, target, index);
 			}
+
+			if (config.swapTyssSpellbook())
+			{
+				swap("spellbook", option, target, index);
+			}
 		}
 		else if (!shiftHeld && option.equals("wear"))
 		{

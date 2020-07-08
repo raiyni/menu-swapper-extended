@@ -271,4 +271,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "swapTyssSpellbook",
+		name = "Tyss Spellbook",
+		description = "Swaps Talk-To to with Spellbook for Tyss at the dark altar"
+	)
+	default boolean swapTyssSpellbook()
+	{
+		return false;
+	}
 }
