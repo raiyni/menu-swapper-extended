@@ -156,6 +156,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				swap("start-minigame", option, target, index);
 				swap("dream", option, target, index);
 				swap("escort", option, target, index);
+				swap("join", option, target, index);
 			}
 
 			if (config.swapSendParcel())
