@@ -202,7 +202,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 			{
 				swap(config.swapMorytaniaLegsLeftClick().getOption().toLowerCase(), option, target, index);
 			}
-			else if (target.startsWith("ardougne cloak"))
+			else if (target.startsWith("ardougne cloak") || target.startsWith("ardougne max cape"))
 			{
 				swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
 			}
