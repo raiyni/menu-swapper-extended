@@ -275,6 +275,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap(config.swapSpellbookSwapLeftClick().getOption().toLowerCase(), option, target, index);
 		}
+		else if (target.endsWith("pouch") && option.equals("fill"))
+		{
+			swap("empty", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)

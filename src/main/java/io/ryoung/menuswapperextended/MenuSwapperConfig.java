@@ -281,4 +281,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+			keyName = "swapEssencePouch",
+			name = "Essence Pouch",
+			description = "Swaps fill with Empty on Rune Essence pouches"
+	)
+	default boolean swapEssencePouch()
+	{
+		return false;
+	}
 }
