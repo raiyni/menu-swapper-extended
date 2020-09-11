@@ -281,4 +281,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "swapGuzzleRockCake"
+		name = "Guzzle Rock Cake"
+		description = "Swaps Eat with Guzzle on the Dwarven Rock Cake"
+	)
+	default boolean swapGuzzleRockCake() {
+		return false;
+	}
 }
