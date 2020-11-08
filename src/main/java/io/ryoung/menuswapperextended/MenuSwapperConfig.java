@@ -281,4 +281,14 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "swapGodWarsDoor",
+		name = "God Wars Private Instance",
+		description = "Swaps the normal and private GWD rooms for Trailblazer League"
+	)
+	default boolean swapGodWarsDoor()
+	{
+		return false;
+	}
 }
