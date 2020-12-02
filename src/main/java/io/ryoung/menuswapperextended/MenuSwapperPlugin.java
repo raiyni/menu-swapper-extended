@@ -254,7 +254,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("prifddinas", option, target, index);
 		}
-		else if (!shiftHeld && target.startsWith("pharaoh's sceptre") && option.equals("jalsavrah"))
+		else if (!shiftHeld && target.startsWith("pharaoh's sceptre") && option.equals("wield"))
 		{
 			swap(config.swapPharaohSceptreLeftClick().getOption().toLowerCase(), option, target, index);
 		}
