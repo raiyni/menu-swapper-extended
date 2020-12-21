@@ -279,6 +279,10 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("open (private)", option, target, index);
 		}
+		else if (config.swapStrayDog() && option.equals("shoo-away") && target.contains("stray dog"))
+		{
+			swap("pet", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
