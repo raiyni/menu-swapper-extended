@@ -28,14 +28,44 @@ package io.ryoung.menuswapperextended;
 import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
+import net.runelite.client.config.ConfigSection;
 
 @ConfigGroup("menuswapperextended")
 public interface MenuSwapperConfig extends Config
 {
+	@ConfigSection(
+		name = "Item Swaps",
+		description = "All options that swap item menu entries",
+		position = 0
+	)
+	String itemSection = "items";
+
+	@ConfigSection(
+		name = "NPC Swaps",
+		description = "All options that swap NPC menu entries",
+		position = 1
+	)
+	String npcSection = "npcs";
+
+	@ConfigSection(
+		name = "Object Swaps",
+		description = "All options that swap object menu entries",
+		position = 2
+	)
+	String objectSection = "objects";
+
+	@ConfigSection(
+		name = "UI Swaps",
+		description = "All options that swap entries in the UI (except Items)",
+		position = 3
+	)
+	String uiSection = "ui";
+
 	@ConfigItem(
 		keyName = "swapMinigames",
 		name = "Minigames",
-		description = "Swap Talk-to with actions that start Minigames"
+		description = "Swap Talk-to with actions that start Minigames",
+		section = npcSection
 	)
 	default boolean swapMinigames()
 	{
@@ -45,7 +75,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapSearch",
 		name = "Search",
-		description = "Swap Close, Shut with Search on chests, cupboards, etc."
+		description = "Swap Close, Shut with Search on chests, cupboards, etc.",
+		section = objectSection
 	)
 	default boolean swapSearch()
 	{
@@ -55,7 +86,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapBuyPlank",
 		name = "Buy-Plank",
-		description = "Swap Talk-to with Buy-Plank on Sawmill Operator"
+		description = "Swap Talk-to with Buy-Plank on Sawmill Operator",
+		section = npcSection
 	)
 	default boolean swapPlank()
 	{
@@ -65,7 +97,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapStun",
 		name = "Stun Hoop Snakes",
-		description = "Swap Attack with Stun"
+		description = "Swap Attack with Stun",
+		section = npcSection
 	)
 	default boolean swapStun()
 	{
@@ -75,7 +108,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "claimDynamite",
 		name = "Claim Dynamite",
-		description = "Swap Talk-to with Claim Dynamite on Thirus"
+		description = "Swap Talk-to with Claim Dynamite on Thirus",
+		section = npcSection
 	)
 	default boolean claimDynamite()
 	{
@@ -85,7 +119,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapWildernessLever",
 		name = "Wilderness Lever to Edgeville",
-		description = "Swap Edgeville Lever as default for wilderness lever"
+		description = "Swap Edgeville Lever as default for wilderness lever",
+		section = objectSection
 	)
 	default boolean swapWildernessLever()
 	{
@@ -95,7 +130,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapSendParcel",
 		name = "Send Parcel",
-		description = "Swap Talk-To to with Send-Parcel for Rionasta at the Tai Bwo Wannai village."
+		description = "Swap Talk-To to with Send-Parcel for Rionasta at the Tai Bwo Wannai village.",
+		section = npcSection
 	)
 	default boolean swapSendParcel()
 	{
@@ -105,7 +141,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapTeleportToDestination",
 		name = "Obelisk",
-		description = "Swap Activate with Teleport to Destination or Set Destination"
+		description = "Swap Activate with Teleport to Destination or Set Destination",
+		section = objectSection
 	)
 	default ObeliskMode swapTeleportToDestination()
 	{
@@ -115,7 +152,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapZulrahCollect",
 		name = "Collect (Zulrah)",
-		description = "Swap Collect with Talk-to for Priestess Zul-Gwenwynig at Zul-Andra."
+		description = "Swap Collect with Talk-to for Priestess Zul-Gwenwynig at Zul-Andra.",
+		section = npcSection
 	)
 	default boolean swapZulrahCollect()
 	{
@@ -125,7 +163,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "decant",
 		name = "Decant",
-		description = "Decant for e.g. Bob Barter"
+		description = "Decant for e.g. Bob Barter",
+		section = npcSection
 	)
 	default boolean swapDecant()
 	{
@@ -135,7 +174,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "zahurOption",
 		name = "Zahur",
-		description = "Zahur default option"
+		description = "Zahur default option",
+		section = npcSection
 	)
 	default ZahurMode swapZahur()
 	{
@@ -145,7 +185,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "dagganothKingsLadder",
 		name = "Dagganoth King Ladder",
-		description = "Change the default option to slayer in the Dagannoth Kings lair."
+		description = "Change the default option to slayer in the Dagannoth Kings lair.",
+		section = objectSection
 	)
 	default boolean dagganothKingsLadder()
 	{
@@ -155,7 +196,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapStore",
 		name = "Builders Store",
-		description = "Swap Trade-General-Store with Trade-Builders-Store for the NPC Razmire Keelgan"
+		description = "Swap Trade-General-Store with Trade-Builders-Store for the NPC Razmire Keelgan",
+		section = npcSection
 	)
 	default boolean swapStore()
 	{
@@ -165,7 +207,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapKaramjaGlovesLeftClick",
 		name = "Karamja Gloves",
-		description = "Change the left-click option on Karamja Gloves"
+		description = "Change the left-click option on Karamja Gloves",
+		section = itemSection
 	)
 	default KaramjaGlovesMode swapKaramjaGlovesLeftClick()
 	{
@@ -175,7 +218,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapConsCape",
 		name = "Construction Cape",
-		description = "Change the left-click option on Construction Cape"
+		description = "Change the left-click option on Construction Cape",
+		section = itemSection
 	)
 	default boolean swapConsCape()
 	{
@@ -185,7 +229,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapTeleCrystal",
 		name = "Teleport Crystal",
-		description = "Swaps the Crystal Seed Teleport to Prifddinas"
+		description = "Swaps the Crystal Seed Teleport to Prifddinas",
+		section = itemSection
 	)
 	default boolean swapTeleCrystal()
 	{
@@ -195,7 +240,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapPharaohSceptreLeftClick",
 		name = "Pharaoh's Sceptre",
-		description = "Change the left-click option on Pharaoh Sceptre"
+		description = "Change the left-click option on Pharaoh Sceptre",
+		section = itemSection
 	)
 	default PharaohSceptreMode swapPharaohSceptreLeftClick()
 	{
@@ -205,7 +251,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapDesertAmuletLeftClick",
 		name = "Desert Amulet",
-		description = "Change the left-click option on Desert Amulet"
+		description = "Change the left-click option on Desert Amulet",
+		section = itemSection
 	)
 	default DesertAmuletMode swapDesertAmuletLeftClick()
 	{
@@ -215,7 +262,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapMorytaniaLegsLeftClick",
 		name = "Morytania Legs",
-		description = "Change the left-click option on Morytania Legs"
+		description = "Change the left-click option on Morytania Legs",
+		section = itemSection
 	)
 	default MorytaniaLegsMode swapMorytaniaLegsLeftClick()
 	{
@@ -225,7 +273,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapArdougneCloakLeftClick",
 		name = "Ardougne Cloak",
-		description = "Change the left-click option on Ardougne Cloak"
+		description = "Change the left-click option on Ardougne Cloak",
+		section = itemSection
 	)
 	default ArdougneCloakMode swapArdougneCloakLeftClick()
 	{
@@ -235,7 +284,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapTraderCrewmemberLeftClick",
 		name = "Charter Ships",
-		description = "Change the left-click option on Trader Crewmembers on Charter ships"
+		description = "Change the left-click option on Trader Crewmembers on Charter ships",
+		section = npcSection
 	)
 	default CharterShipsMode swapTraderCrewmemberLeftClick()
 	{
@@ -245,7 +295,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapDrakansMedallionLeftClick",
 		name = "Drakan's Medallion",
-		description = "Change the left-click option on Drakan's Medallion"
+		description = "Change the left-click option on Drakan's Medallion",
+		section = itemSection
 	)
 	default DrakansMedallionMode swapDrakansMedallionLeftClick()
 	{
@@ -255,7 +306,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapSpellbookSwapLeftClick",
 		name = "Spellbook Swap",
-		description = "Change the left-click option on Spellbook Swap (Lunar Spell)"
+		description = "Change the left-click option on Spellbook Swap (Lunar Spell)",
+		section = uiSection
 	)
 	default SpellbookSwapMode swapSpellbookSwapLeftClick()
 	{
@@ -265,7 +317,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapGiveSword",
 		name = "Give Sword",
-		description = "Swaps Talk-To to with Give-Sword for Tindel Marchant at Port Khazard"
+		description = "Swaps Talk-To to with Give-Sword for Tindel Marchant at Port Khazard",
+		section = npcSection
 	)
 	default boolean swapGiveSword()
 	{
@@ -275,7 +328,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapTyssSpellbook",
 		name = "Tyss Spellbook",
-		description = "Swaps Talk-To to with Spellbook for Tyss at the dark altar"
+		description = "Swaps Talk-To to with Spellbook for Tyss at the dark altar",
+		section = npcSection
 	)
 	default boolean swapTyssSpellbook()
 	{
@@ -285,7 +339,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapGodWarsDoor",
 		name = "God Wars Private Instance",
-		description = "Swaps the normal and private GWD rooms for Trailblazer League"
+		description = "Swaps the normal and private GWD rooms for Trailblazer League",
+		section = objectSection
 	)
 	default boolean swapGodWarsDoor()
 	{
@@ -295,7 +350,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 			keyName = "swapStrayDog",
 			name = "Stray dog",
-			description = "Swaps Shoo-away with Pet for Stray dogs"
+			description = "Swaps Shoo-away with Pet for Stray dogs",
+		section = npcSection
 	)
 	default boolean swapStrayDog()
 	{
