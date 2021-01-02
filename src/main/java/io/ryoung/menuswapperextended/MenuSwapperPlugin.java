@@ -283,6 +283,11 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("pet", option, target, index);
 		}
+		else if (config.swapRunePouch() && option.equals("fill") && (target.equals("small pouch") ||
+			target.equals("medium pouch") || target.equals("large pouch") || target.equals("giant pouch"))
+		{
+			swap("empty", option, target, index);
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
