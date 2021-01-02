@@ -357,4 +357,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "swapRunePouch",
+		name = "Rune pouch",
+		description = "Swaps Fill with Empty for all Rune pouches",
+		section = itemSection
+	)
+	default boolean swapRunePouch()
+	{
+		return false;
+	}
 }
