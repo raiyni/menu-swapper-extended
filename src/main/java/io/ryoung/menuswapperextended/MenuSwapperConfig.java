@@ -29,6 +29,7 @@ import net.runelite.client.config.Config;
 import net.runelite.client.config.ConfigGroup;
 import net.runelite.client.config.ConfigItem;
 import net.runelite.client.config.ConfigSection;
+import net.runelite.client.config.Keybind;
 
 @ConfigGroup("menuswapperextended")
 public interface MenuSwapperConfig extends Config
@@ -312,6 +313,102 @@ public interface MenuSwapperConfig extends Config
 	default SpellbookSwapMode swapSpellbookSwapLeftClick()
 	{
 		return SpellbookSwapMode.CAST;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwap1Hotkey",
+			name = "Bank 1",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit 1 option",
+			section = uiSection,
+			position = 0
+	)
+	default Keybind getBankSwap1Hotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwap5Hotkey",
+			name = "Bank 5",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit 5 option",
+			section = uiSection,
+			position = 1
+	)
+	default Keybind getBankSwap5Hotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwap10Hotkey",
+			name = "Bank 10",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit 10 option",
+			section = uiSection,
+			position = 2
+	)
+	default Keybind getBankSwap10Hotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwapXHotkey",
+			name = "Bank X",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit X option",
+			section = uiSection,
+			position = 3
+	)
+	default Keybind getBankSwapXHotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwapSetXHotkey",
+			name = "Bank Set-X",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit SetX option",
+			section = uiSection,
+			position = 4
+	)
+	default Keybind getBankSwapSetXHotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwapAllHotkey",
+			name = "Bank All",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit All option",
+			section = uiSection,
+			position = 5
+	)
+	default Keybind getBankSwapAllHotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwapAllBut1Hotkey",
+			name = "Bank All-But-1",
+			description = "The hotkey which, when held, swaps the bank's withdraw/deposit AllBut1 option",
+			section = uiSection,
+			position = 6
+	)
+	default Keybind getBankSwapAllBut1Hotkey()
+	{
+		return Keybind.NOT_SET;
+	}
+
+	@ConfigItem(
+			keyName = "bankSwapEquipUseWieldHotkey",
+			name = "Bank Eat/Wield/Etc.",
+			description = "The hotkey which, when held, swaps the bank's EquipUseWield option",
+			section = uiSection,
+			position = 7
+	)
+	default Keybind getBankSwapExtraOpHotkey()
+	{
+		return Keybind.NOT_SET;
 	}
 
 	@ConfigItem(
