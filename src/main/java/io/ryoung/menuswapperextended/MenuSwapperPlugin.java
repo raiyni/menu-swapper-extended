@@ -282,7 +282,9 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		else if (config.swapStrayDog() && option.equals("shoo-away") && target.contains("stray dog"))
 		{
 			swap("pet", option, target, index);
-		} else if(option.equals("take") && (target.startsWith("servery") || target.equals("bowl") || target.equals("knife"))){
+		} 
+		else if(option.equals("take") && (target.startsWith("servery") || target.equals("bowl") || target.equals("knife")))
+		{
 			swap(config.swapTakeLeftClick().getOption().toLowerCase(), option, target, index);
 		}
 	}
