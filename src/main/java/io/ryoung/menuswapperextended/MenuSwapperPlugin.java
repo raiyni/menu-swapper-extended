@@ -138,7 +138,9 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 			return;
 		}
 
-		if (option.equals("talk-to"))
+		if(option.equals("take") && target.startsWith("servery")){
+			swap(config.swapTakeLeftClick().getOption().toLowerCase(), option, target, index);
+		} else if (option.equals("talk-to"))
 		{
 			if (config.swapPlank() && target.equals("sawmill operator"))
 			{

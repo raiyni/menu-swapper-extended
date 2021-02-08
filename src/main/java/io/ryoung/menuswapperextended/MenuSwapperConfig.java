@@ -357,4 +357,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+			keyName = "swapTakeLeftClick",
+			name = "Hosidius Mess Take",
+			description = "Change the left-click option on Hosidius Mess items",
+			section = objectSection
+	)
+	default TakeMode swapTakeLeftClick()
+	{
+		return TakeMode.TAKE1;
+	}
 }
