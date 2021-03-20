@@ -35,7 +35,7 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 			keyName = "itemList",
 			name = "Item list to left click rub/teleport",
-			description = "Items you want to left click drop, turn off Teleport Item in Menu Entry Swapper"
+			description = "Items you want to left click teleport, turn off Teleport Item in Menu Entry Swapper"
 	)
 	default String itemList()
 	{
