@@ -33,6 +33,15 @@ import net.runelite.client.config.ConfigItem;
 public interface MenuSwapperConfig extends Config
 {
 	@ConfigItem(
+			keyName = "itemList",
+			name = "Item list to left click rub/teleport",
+			description = "Items you want to left click drop, turn off Teleport Item in Menu Entry Swapper"
+	)
+	default String itemList()
+	{
+		return "";
+	}
+	@ConfigItem(
 		keyName = "swapMinigames",
 		name = "Minigames",
 		description = "Swap Talk-to with actions that start Minigames"
