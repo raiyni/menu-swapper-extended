@@ -42,6 +42,7 @@ import net.runelite.api.events.ClientTick;
 import net.runelite.api.events.FocusChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.events.ConfigChanged;
 import net.runelite.client.input.KeyListener;
 import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
@@ -72,6 +73,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 	private KeyManager keyManager;
 
 	private boolean shiftHeld = false;
+	private List<String> itemList;
 
 	@Provides
 	MenuSwapperConfig provideConfig(ConfigManager configManager)
@@ -84,6 +86,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 	{
 		shiftHeld = false;
 		keyManager.registerKeyListener(this);
+		itemList = Text.fromCSV(config.itemList().toLowerCase());
 	}
 
 	@Override
@@ -91,6 +94,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 	{
 		shiftHeld = false;
 		keyManager.unregisterKeyListener(this);
+		itemList.clear();
 	}
 
 	private final ArrayListMultimap<String, Integer> optionIndexes = ArrayListMultimap.create();
@@ -264,6 +268,27 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		{
 			swap("open", option, target, index);
 		}
+		try
+		{
+			if (itemList == null || menuEntry == null|| itemList.size() == 0)
+			{
+				return;
+			}
+
+			for (String item : itemList)
+			{
+				if (item.equals(target))
+				{
+					{
+						swap("teleport", option, target, true);
+						swap("rub", option, target, true);
+					}
+				}
+			}
+
+		} catch (Exception ignored) {
+			// ignored
+		}
 	}
 
 	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
@@ -409,7 +434,14 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 			shiftHeld = false;
 		}
 	}
-
+	@Subscribe
+	private void onConfigChanged(ConfigChanged event)
+	{
+		if (event.getGroup().equals("itemList"))
+		{
+			itemList = Text.fromCSV(config.itemList().toLowerCase());
+		}
+	}
 	@Subscribe
 	public void onFocusChanged(FocusChanged event)
 	{
