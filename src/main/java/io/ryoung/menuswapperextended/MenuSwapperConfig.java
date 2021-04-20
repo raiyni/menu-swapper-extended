@@ -361,7 +361,8 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "guzzleRockCake",
 		name = "Guzzle",
-		description = "Swaps Eat with Guzzle for Dwarven rock cake"
+		description = "Swaps Eat with Guzzle for Dwarven rock cake",
+		section = itemSection
 	)
 	default boolean guzzleRockCake()
 	{
