@@ -128,17 +128,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "swapSendParcel",
-		name = "Send Parcel",
-		description = "Swap Talk-To to with Send-Parcel for Rionasta at the Tai Bwo Wannai village.",
-		section = npcSection
-	)
-	default boolean swapSendParcel()
-	{
-		return false;
-	}
-
-	@ConfigItem(
 		keyName = "swapTeleportToDestination",
 		name = "Obelisk",
 		description = "Swap Activate with Teleport to Destination or Set Destination",
@@ -156,17 +145,6 @@ public interface MenuSwapperConfig extends Config
 		section = npcSection
 	)
 	default boolean swapZulrahCollect()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		keyName = "decant",
-		name = "Decant",
-		description = "Decant for e.g. Bob Barter",
-		section = npcSection
-	)
-	default boolean swapDecant()
 	{
 		return false;
 	}
@@ -196,7 +174,7 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "swapStore",
 		name = "Builders Store",
-		description = "Swap Trade-General-Store with Trade-Builders-Store for the NPC Razmire Keelgan",
+		description = "Swap Talk-to with Trade-Builders-Store for the NPC Razmire Keelgan",
 		section = npcSection
 	)
 	default boolean swapStore()
@@ -348,9 +326,9 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "swapStrayDog",
-			name = "Stray dog",
-			description = "Swaps Shoo-away with Pet for Stray dogs",
+		keyName = "swapStrayDog",
+		name = "Stray dog",
+		description = "Swaps Shoo-away with Pet for Stray dogs",
 		section = npcSection
 	)
 	default boolean swapStrayDog()
