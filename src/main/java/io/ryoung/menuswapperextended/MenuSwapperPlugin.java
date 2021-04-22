@@ -44,35 +44,19 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.inject.Inject;
-import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
-import net.runelite.api.ItemComposition;
 import net.runelite.api.KeyCode;
 import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.NPC;
 import net.runelite.api.events.ClientTick;
-import net.runelite.api.events.MenuOpened;
-import net.runelite.api.events.MenuOptionClicked;
-import net.runelite.api.events.PostItemComposition;
-import net.runelite.api.events.WidgetMenuOptionClicked;
-import net.runelite.api.widgets.WidgetInfo;
-import net.runelite.client.callback.ClientThread;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.events.ConfigChanged;
-import net.runelite.client.game.ItemManager;
-import net.runelite.client.game.ItemVariationMapping;
-import net.runelite.client.input.KeyManager;
-import net.runelite.client.menus.MenuManager;
-import net.runelite.client.menus.WidgetMenuOption;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.menuentryswapper.MenuEntrySwapperConfig;
 import net.runelite.client.util.Text;
-import org.apache.commons.lang3.ArrayUtils;
 
 @Slf4j
 @PluginDescriptor(
@@ -80,42 +64,6 @@ import org.apache.commons.lang3.ArrayUtils;
 )
 public class MenuSwapperPlugin extends Plugin
 {
-	private static final String CONFIGURE = "Configure";
-	private static final String SAVE = "Save";
-	private static final String RESET = "Reset";
-	private static final String MENU_TARGET = "Shift-click";
-
-	private static final String SHIFTCLICK_CONFIG_GROUP = "shiftclick";
-	private static final String ITEM_KEY_PREFIX = "item_";
-
-	private static final WidgetMenuOption FIXED_INVENTORY_TAB_CONFIGURE = new WidgetMenuOption(CONFIGURE,
-		MENU_TARGET, WidgetInfo.FIXED_VIEWPORT_INVENTORY_TAB);
-
-	private static final WidgetMenuOption FIXED_INVENTORY_TAB_SAVE = new WidgetMenuOption(SAVE,
-		MENU_TARGET, WidgetInfo.FIXED_VIEWPORT_INVENTORY_TAB);
-
-	private static final WidgetMenuOption RESIZABLE_INVENTORY_TAB_CONFIGURE = new WidgetMenuOption(CONFIGURE,
-		MENU_TARGET, WidgetInfo.RESIZABLE_VIEWPORT_INVENTORY_TAB);
-
-	private static final WidgetMenuOption RESIZABLE_INVENTORY_TAB_SAVE = new WidgetMenuOption(SAVE,
-		MENU_TARGET, WidgetInfo.RESIZABLE_VIEWPORT_INVENTORY_TAB);
-
-	private static final WidgetMenuOption RESIZABLE_BOTTOM_LINE_INVENTORY_TAB_CONFIGURE = new WidgetMenuOption(CONFIGURE,
-		MENU_TARGET, WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INVENTORY_TAB);
-
-	private static final WidgetMenuOption RESIZABLE_BOTTOM_LINE_INVENTORY_TAB_SAVE = new WidgetMenuOption(SAVE,
-		MENU_TARGET, WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INVENTORY_TAB);
-
-	private static final Set<MenuAction> ITEM_MENU_TYPES = ImmutableSet.of(
-		MenuAction.ITEM_FIRST_OPTION,
-		MenuAction.ITEM_SECOND_OPTION,
-		MenuAction.ITEM_THIRD_OPTION,
-		MenuAction.ITEM_FOURTH_OPTION,
-		MenuAction.ITEM_FIFTH_OPTION,
-		MenuAction.EXAMINE_ITEM,
-		MenuAction.ITEM_USE
-	);
-
 	private static final Set<MenuAction> NPC_MENU_TYPES = ImmutableSet.of(
 		MenuAction.NPC_FIRST_OPTION,
 		MenuAction.NPC_SECOND_OPTION,
@@ -128,25 +76,7 @@ public class MenuSwapperPlugin extends Plugin
 	private Client client;
 
 	@Inject
-	private ClientThread clientThread;
-
-	@Inject
 	private MenuSwapperConfig config;
-
-	@Inject
-	private ConfigManager configManager;
-
-	@Inject
-	private MenuManager menuManager;
-
-	@Inject
-	private ItemManager itemManager;
-
-	@Inject
-	private KeyManager keyManager;
-
-	@Getter
-	private boolean configuringShiftClick = false;
 
 	private final Multimap<String, Swap> swaps = LinkedHashMultimap.create();
 	private final ArrayListMultimap<String, Integer> optionIndexes = ArrayListMultimap.create();
@@ -160,18 +90,12 @@ public class MenuSwapperPlugin extends Plugin
 	@Override
 	public void startUp()
 	{
-		if (configManager.getConfiguration(MenuEntrySwapperConfig.GROUP, "shiftClickCustomization").equals("true"))
-		{
-			enableCustomization();
-		}
-
 		setupSwaps();
 	}
 
 	@Override
 	public void shutDown()
 	{
-		disableCustomization();
 		swaps.clear();
 	}
 
@@ -245,193 +169,6 @@ public class MenuSwapperPlugin extends Plugin
 		swaps.put(option, new Swap(alwaysTrue(), targetPredicate, swappedOption, enabled, false));
 	}
 
-	@Subscribe
-	public void onConfigChanged(ConfigChanged event)
-	{
-		if (event.getGroup().equals(MenuEntrySwapperConfig.GROUP) && event.getKey().equals("shiftClickCustomization"))
-		{
-			if (configManager.getConfiguration(MenuEntrySwapperConfig.GROUP, "shiftClickCustomization").equals("true"))
-			{
-				enableCustomization();
-			}
-			else
-			{
-				disableCustomization();
-			}
-		}
-		else if (event.getGroup().equals(SHIFTCLICK_CONFIG_GROUP) && event.getKey().startsWith(ITEM_KEY_PREFIX))
-		{
-			clientThread.invoke(this::resetItemCompositionCache);
-		}
-	}
-
-	private void resetItemCompositionCache()
-	{
-		itemManager.invalidateItemCompositionCache();
-		client.getItemCompositionCache().reset();
-	}
-
-	private Integer getSwapConfig(int itemId)
-	{
-		itemId = ItemVariationMapping.map(itemId);
-		String config = configManager.getConfiguration(SHIFTCLICK_CONFIG_GROUP, ITEM_KEY_PREFIX + itemId);
-		if (config == null || config.isEmpty())
-		{
-			return null;
-		}
-
-		return Integer.parseInt(config);
-	}
-
-	private void setSwapConfig(int itemId, int index)
-	{
-		itemId = ItemVariationMapping.map(itemId);
-		configManager.setConfiguration(SHIFTCLICK_CONFIG_GROUP, ITEM_KEY_PREFIX + itemId, index);
-	}
-
-	private void unsetSwapConfig(int itemId)
-	{
-		itemId = ItemVariationMapping.map(itemId);
-		configManager.unsetConfiguration(SHIFTCLICK_CONFIG_GROUP, ITEM_KEY_PREFIX + itemId);
-	}
-
-	private void enableCustomization()
-	{
-		refreshShiftClickCustomizationMenus();
-		// set shift click action index on the item compositions
-		clientThread.invoke(this::resetItemCompositionCache);
-	}
-
-	private void disableCustomization()
-	{
-		removeShiftClickCustomizationMenus();
-		configuringShiftClick = false;
-		// flush item compositions to reset the shift click action index
-		clientThread.invoke(this::resetItemCompositionCache);
-	}
-
-	@Subscribe
-	public void onWidgetMenuOptionClicked(WidgetMenuOptionClicked event)
-	{
-		if (event.getWidget() == WidgetInfo.FIXED_VIEWPORT_INVENTORY_TAB
-			|| event.getWidget() == WidgetInfo.RESIZABLE_VIEWPORT_INVENTORY_TAB
-			|| event.getWidget() == WidgetInfo.RESIZABLE_VIEWPORT_BOTTOM_LINE_INVENTORY_TAB)
-		{
-			configuringShiftClick = event.getMenuOption().equals(CONFIGURE) && Text.removeTags(event.getMenuTarget()).equals(MENU_TARGET);
-			refreshShiftClickCustomizationMenus();
-		}
-	}
-
-	@Subscribe
-	public void onMenuOpened(MenuOpened event)
-	{
-		if (!configuringShiftClick)
-		{
-			return;
-		}
-
-		MenuEntry firstEntry = event.getFirstEntry();
-		if (firstEntry == null)
-		{
-			return;
-		}
-
-		int widgetId = firstEntry.getParam1();
-		if (widgetId != WidgetInfo.INVENTORY.getId())
-		{
-			return;
-		}
-
-		int itemId = firstEntry.getIdentifier();
-		if (itemId == -1)
-		{
-			return;
-		}
-
-		ItemComposition itemComposition = itemManager.getItemComposition(itemId);
-		MenuAction shiftClickAction = MenuAction.ITEM_USE;
-		final int shiftClickActionIndex = itemComposition.getShiftClickActionIndex();
-
-		if (shiftClickActionIndex >= 0)
-		{
-			shiftClickAction = MenuAction.of(MenuAction.ITEM_FIRST_OPTION.getId() + shiftClickActionIndex);
-		}
-
-		MenuEntry[] entries = event.getMenuEntries();
-
-		for (MenuEntry entry : entries)
-		{
-			final MenuAction menuAction = MenuAction.of(entry.getType());
-
-			if (ITEM_MENU_TYPES.contains(menuAction) && entry.getIdentifier() == itemId)
-			{
-				entry.setType(MenuAction.RUNELITE.getId());
-
-				if (shiftClickAction == menuAction)
-				{
-					entry.setOption("* " + entry.getOption());
-				}
-			}
-		}
-
-		final MenuEntry resetShiftClickEntry = new MenuEntry();
-		resetShiftClickEntry.setOption(RESET);
-		resetShiftClickEntry.setTarget(MENU_TARGET);
-		resetShiftClickEntry.setIdentifier(itemId);
-		resetShiftClickEntry.setParam1(widgetId);
-		resetShiftClickEntry.setType(MenuAction.RUNELITE.getId());
-		client.setMenuEntries(ArrayUtils.addAll(entries, resetShiftClickEntry));
-	}
-
-	@Subscribe
-	public void onMenuOptionClicked(MenuOptionClicked event)
-	{
-		if (event.getMenuAction() != MenuAction.RUNELITE || event.getWidgetId() != WidgetInfo.INVENTORY.getId())
-		{
-			return;
-		}
-
-		int itemId = event.getId();
-
-		if (itemId == -1)
-		{
-			return;
-		}
-
-		String option = event.getMenuOption();
-		String target = event.getMenuTarget();
-		ItemComposition itemComposition = itemManager.getItemComposition(itemId);
-
-		if (option.equals(RESET) && target.equals(MENU_TARGET))
-		{
-			unsetSwapConfig(itemId);
-			return;
-		}
-
-		if (!itemComposition.getName().equals(Text.removeTags(target)))
-		{
-			return;
-		}
-
-		if (option.equals("Use")) //because "Use" is not in inventoryActions
-		{
-			setSwapConfig(itemId, -1);
-		}
-		else
-		{
-			String[] inventoryActions = itemComposition.getInventoryActions();
-
-			for (int index = 0; index < inventoryActions.length; index++)
-			{
-				if (option.equals(inventoryActions[index]))
-				{
-					setSwapConfig(itemId, index);
-					break;
-				}
-			}
-		}
-	}
-
 	private void swapMenuEntry(int index, MenuEntry menuEntry)
 	{
 		final int eventId = menuEntry.getIdentifier();
@@ -454,18 +191,6 @@ public class MenuSwapperPlugin extends Plugin
 			|| menuAction == MenuAction.ITEM_FIFTH_OPTION
 			|| menuAction == MenuAction.ITEM_USE))
 		{
-			// Special case use shift click due to items not actually containing a "Use" option, making
-			// the client unable to perform the swap itself.
-			if (configManager.getConfiguration(MenuEntrySwapperConfig.GROUP, "shiftClickCustomization").equals("true") && !option.equals("use"))
-			{
-				Integer customOption = getSwapConfig(eventId);
-
-				if (customOption != null && customOption == -1)
-				{
-					swap("use", target, index, true);
-				}
-			}
-
 			// don't perform swaps on items when shift is held; instead prefer the client menu swap, which
 			// we may have overwrote
 			return;
@@ -510,25 +235,6 @@ public class MenuSwapperPlugin extends Plugin
 		for (MenuEntry entry : menuEntries)
 		{
 			swapMenuEntry(idx++, entry);
-		}
-	}
-
-	@Subscribe
-	public void onPostItemComposition(PostItemComposition event)
-	{
-		if (configManager.getConfiguration(MenuEntrySwapperConfig.GROUP, "shiftClickCustomization").equals("false"))
-		{
-			// since shift-click is done by the client we have to check if our shift click customization is on
-			// prior to altering the item shift click action index.
-			return;
-		}
-
-		ItemComposition itemComposition = event.getItemComposition();
-		Integer option = getSwapConfig(itemComposition.getId());
-
-		if (option != null)
-		{
-			itemComposition.setShiftClickActionIndex(option);
 		}
 	}
 
@@ -618,33 +324,6 @@ public class MenuSwapperPlugin extends Plugin
 	{
 		int idx = Collections.binarySearch(list, value);
 		list.add(idx < 0 ? -idx - 1 : idx, value);
-	}
-
-	private void removeShiftClickCustomizationMenus()
-	{
-		menuManager.removeManagedCustomMenu(FIXED_INVENTORY_TAB_CONFIGURE);
-		menuManager.removeManagedCustomMenu(FIXED_INVENTORY_TAB_SAVE);
-		menuManager.removeManagedCustomMenu(RESIZABLE_BOTTOM_LINE_INVENTORY_TAB_CONFIGURE);
-		menuManager.removeManagedCustomMenu(RESIZABLE_BOTTOM_LINE_INVENTORY_TAB_SAVE);
-		menuManager.removeManagedCustomMenu(RESIZABLE_INVENTORY_TAB_CONFIGURE);
-		menuManager.removeManagedCustomMenu(RESIZABLE_INVENTORY_TAB_SAVE);
-	}
-
-	private void refreshShiftClickCustomizationMenus()
-	{
-		removeShiftClickCustomizationMenus();
-		if (configuringShiftClick)
-		{
-			menuManager.addManagedCustomMenu(FIXED_INVENTORY_TAB_SAVE);
-			menuManager.addManagedCustomMenu(RESIZABLE_BOTTOM_LINE_INVENTORY_TAB_SAVE);
-			menuManager.addManagedCustomMenu(RESIZABLE_INVENTORY_TAB_SAVE);
-		}
-		else
-		{
-			menuManager.addManagedCustomMenu(FIXED_INVENTORY_TAB_CONFIGURE);
-			menuManager.addManagedCustomMenu(RESIZABLE_BOTTOM_LINE_INVENTORY_TAB_CONFIGURE);
-			menuManager.addManagedCustomMenu(RESIZABLE_INVENTORY_TAB_CONFIGURE);
-		}
 	}
 
 	private boolean shiftModifier()
