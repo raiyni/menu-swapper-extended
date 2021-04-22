@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2020, SomeZer0
+ * Copyright (c) 2021, Ron Young <https://github.com/raiyni>
  * All rights reserved.
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions are met:
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice, this
- *    list of conditions and the following disclaimer.
+ *     list of conditions and the following disclaimer.
  * 2. Redistributions in binary form must reproduce the above copyright notice,
- *    this list of conditions and the following disclaimer in the documentation
- *    and/or other materials provided with the distribution.
+ *     this list of conditions and the following disclaimer in the documentation
+ *     and/or other materials provided with the distribution.
  *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
@@ -22,38 +22,24 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
+
 package io.ryoung.menuswapperextended;
 
 import java.util.function.Predicate;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
-public enum SpellbookSwapMode implements SwapMode
+public interface SwapMode
 {
-	CAST("Cast"),
-	STANDARD("Standard"),
-	ANCIENT("Ancient"),
-	ARCEUUS("Arceuus");
-
-	private final String option;
-
-	@Override
-	public String toString()
-	{
-		return option;
-	}
-
-	@Override
-	public boolean checkShift()
-	{
+	default boolean strict() {
 		return true;
 	}
 
-	@Override
-	public Predicate<String> checkTarget()
-	{
-		return target -> target.startsWith("spellbook swap");
+	default boolean checkShift() {
+		return false;
 	}
+
+	default Predicate<String> checkTarget() {
+		return s -> true;
+	}
+
+	String getOption();
 }

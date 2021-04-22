@@ -112,37 +112,25 @@ public class MenuSwapperPlugin extends Plugin
 		swap("talk-to", "trade-builders-store", config::swapStore);
 		swap("talk-to", "give-sword", config::swapGiveSword);
 		swap("talk-to", "spellbook", config::swapTyssSpellbook);
-		swap("talk-to", "zahur", "clean", () -> config.swapZahur() == ZahurMode.CLEAN);
-		swap("talk-to", "zahur", "decant", () -> config.swapZahur() == ZahurMode.DECANT);
-		swap("talk-to", "zahur", "make unfinished potion(s)", () -> config.swapZahur() == ZahurMode.MAKE_POTION);
-		swapContains("talk-to", target -> target.startsWith("trader crewmember"), "trade", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.TRADE);
-		swap("talk-to", "charter", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.CHARTER);
-		swap("talk-to",  "charter-to", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.LAST_DESTINATION);
+
+		swapMode("talk-to", ZahurMode.class, config::swapZahur);
+		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
 
 		swap("wear", "tele to poh", () -> !shiftModifier() && config.swapConsCape());
-		swap("wear", "gem mine", () -> !shiftModifier() && config.swapKaramjaGlovesLeftClick() == KaramjaGlovesMode.GEM_MINE);
-		swap("wear", "duradel", () -> !shiftModifier() && config.swapKaramjaGlovesLeftClick() == KaramjaGlovesMode.DURADEL);
-		swap("wear", "nardah", () -> !shiftModifier() && config.swapDesertAmuletLeftClick() == DesertAmuletMode.NARDAH);
-		swap("wear", "kalphite cave", () -> !shiftModifier() && config.swapDesertAmuletLeftClick() == DesertAmuletMode.KALPHITE_CAVE);
-		swap("wear", "ecto teleport", () -> !shiftModifier() && config.swapMorytaniaLegsLeftClick() == MorytaniaLegsMode.ECTO_TELEPORT);
-		swap("wear", "burgh teleport", () -> !shiftModifier() && config.swapMorytaniaLegsLeftClick() == MorytaniaLegsMode.BURGH_TELEPORT);
-		swap("wear", "monastery teleport", () -> !shiftModifier() && config.swapArdougneCloakLeftClick() == ArdougneCloakMode.MONASTERY_TELEPORT);
-		swap("wear", "farm teleport", () -> !shiftModifier() && config.swapArdougneCloakLeftClick() == ArdougneCloakMode.FARM_TELEPORT);
-		swap("wear", "ver sinhaza", () -> !shiftModifier() && config.swapDrakansMedallionLeftClick() == DrakansMedallionMode.VER_SINHAZA);
-		swap("wear", "darkmeyer", () -> !shiftModifier() && config.swapDrakansMedallionLeftClick() == DrakansMedallionMode.DARKMEYER);
-		swap("wield", "jalsavrah", () -> !shiftModifier() && config.swapPharaohSceptreLeftClick() == PharaohSceptreMode.JALSAVRAH);
-		swap("wield", "jaleustrophos", () -> !shiftModifier() && config.swapPharaohSceptreLeftClick() == PharaohSceptreMode.JALEUSTROPHOS);
-		swap("wield", "jaldraocht", () -> !shiftModifier() && config.swapPharaohSceptreLeftClick() == PharaohSceptreMode.JALDRAOCHT);
 
-		swap("activate", "teleport to destination", () -> config.swapTeleportToDestination() == ObeliskMode.TELEPORT_TO_DESTINATION);
-		swap("activate", "set destination", () -> config.swapTeleportToDestination() == ObeliskMode.SET_DESTINATION);
+		swapMode("wear", KaramjaGlovesMode.class, config::swapKaramjaGlovesLeftClick);
+		swapMode("wear", DesertAmuletMode.class, config::swapDesertAmuletLeftClick);
+		swapMode("wear", MorytaniaLegsMode.class, config::swapMorytaniaLegsLeftClick);
+		swapMode("wear", ArdougneCloakMode.class, config::swapArdougneCloakLeftClick);
+		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
+		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
+		swapMode("activate", ObeliskMode.class, config::swapTeleportToDestination);
 
 		swap("ardougne", "edgeville", config::swapWildernessLever);
 
 		swapContains("attack", target -> target.startsWith("hoop snake"), "stun", config::swapStun);
-		swap("cast", "standard", () -> !shiftModifier() && config.swapSpellbookSwapLeftClick() == SpellbookSwapMode.STANDARD);
-		swap("cast", "ancient", () -> !shiftModifier() && config.swapSpellbookSwapLeftClick() == SpellbookSwapMode.ANCIENT);
-		swap("cast", "arceuus", () -> !shiftModifier() && config.swapSpellbookSwapLeftClick() == SpellbookSwapMode.ARCEUUS);
+
+		swapMode("cast", SpellbookSwapMode.class, config::swapSpellbookSwapLeftClick);
 
 		swap("open (normal)", "open (private)", config::swapGodWarsDoor);
 		swap("close", "search", config::swapSearch);
@@ -150,6 +138,20 @@ public class MenuSwapperPlugin extends Plugin
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
+	}
+
+	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
+	{
+		for (T e : mode.getEnumConstants())
+		{
+			swaps.put(option, new Swap(
+				alwaysTrue(),
+				e.checkTarget(),
+				e.getOption().toLowerCase(),
+				() -> (!e.checkShift() || (e.checkShift() && !shiftModifier())) & e == enumGet.get(),
+				e.strict()
+			));
+		}
 	}
 
 	private void swap(String option, String swappedOption, Supplier<Boolean> enabled)

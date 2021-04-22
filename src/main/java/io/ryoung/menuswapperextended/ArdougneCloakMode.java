@@ -24,12 +24,13 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ArdougneCloakMode
+public enum ArdougneCloakMode implements SwapMode
 {
  	WEAR("Wear"),
 	MONASTERY_TELEPORT("Monastery Teleport"),
@@ -41,5 +42,11 @@ public enum ArdougneCloakMode
 	public String toString()
 	{
 		return option;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.startsWith("ardougne cloak") || target.startsWith("ardougne max cape");
 	}
 }

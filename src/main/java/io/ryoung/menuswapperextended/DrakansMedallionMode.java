@@ -24,12 +24,13 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum DrakansMedallionMode
+public enum DrakansMedallionMode implements SwapMode
 {
 	WEAR("Wear"),
 	VER_SINHAZA("Ver Sinhaza"),
@@ -41,5 +42,17 @@ public enum DrakansMedallionMode
 	public String toString()
 	{
 		return option;
+	}
+
+	@Override
+	public boolean checkShift()
+	{
+		return true;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.startsWith("drakan's medallion");
 	}
 }

@@ -24,12 +24,13 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum PharaohSceptreMode
+public enum PharaohSceptreMode implements SwapMode
 {
 	WIELD("Wield"),
 	JALSAVRAH("Jalsavrah"),
@@ -42,5 +43,17 @@ public enum PharaohSceptreMode
 	public String toString()
 	{
 		return option;
+	}
+
+	@Override
+	public boolean checkShift()
+	{
+		return true;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.startsWith("pharaoh's sceptre");
 	}
 }

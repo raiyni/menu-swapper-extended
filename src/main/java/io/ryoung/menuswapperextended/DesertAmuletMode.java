@@ -24,12 +24,13 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum DesertAmuletMode
+public enum DesertAmuletMode implements SwapMode
 {
 	WEAR("Wear"),
 	NARDAH("Nardah"),
@@ -41,5 +42,17 @@ public enum DesertAmuletMode
 	public String toString()
 	{
 		return option;
+	}
+
+	@Override
+	public boolean checkShift()
+	{
+		return true;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.startsWith("desert amulet");
 	}
 }

@@ -24,23 +24,38 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum CharterShipsMode
+public enum CharterShipsMode implements SwapMode
 {
-	TALK("Talk-To"),
-	TRADE("Trade"),
-	CHARTER("Charter"),
-	LAST_DESTINATION("Last Destination");
+	TALK("Talk-To", "talk-to"),
+	TRADE("Trade", "trade"),
+	CHARTER("Charter", "charter"),
+	LAST_DESTINATION("Last Destination", "charter-to");
 
+
+	private final String name;
 	private final String option;
 
 	@Override
 	public String toString()
 	{
-		return option;
+		return name;
+	}
+
+	@Override
+	public boolean strict()
+	{
+		return this != CharterShipsMode.LAST_DESTINATION;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.startsWith("trader crewmember");
 	}
 }

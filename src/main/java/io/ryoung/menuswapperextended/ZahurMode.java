@@ -24,12 +24,13 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ZahurMode
+public enum ZahurMode implements SwapMode
 {
 	TALK("Talk-to"),
 	DECANT("Decant"),
@@ -42,5 +43,11 @@ public enum ZahurMode
 	public String toString()
 	{
 		return option;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.equals("zahur");
 	}
 }
