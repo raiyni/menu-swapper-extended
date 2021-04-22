@@ -115,6 +115,9 @@ public class MenuSwapperPlugin extends Plugin
 		swap("talk-to", "zahur", "clean", () -> config.swapZahur() == ZahurMode.CLEAN);
 		swap("talk-to", "zahur", "decant", () -> config.swapZahur() == ZahurMode.DECANT);
 		swap("talk-to", "zahur", "make unfinished potion(s)", () -> config.swapZahur() == ZahurMode.MAKE_POTION);
+		swapContains("talk-to", target -> target.startsWith("trader crewmember"), "trade", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.TRADE);
+		swap("talk-to", "charter", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.CHARTER);
+		swap("talk-to",  "charter-to", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.LAST_DESTINATION);
 
 		swap("wear", "tele to poh", () -> !shiftModifier() && config.swapConsCape());
 		swap("wear", "gem mine", () -> !shiftModifier() && config.swapKaramjaGlovesLeftClick() == KaramjaGlovesMode.GEM_MINE);
@@ -133,19 +136,19 @@ public class MenuSwapperPlugin extends Plugin
 
 		swap("activate", "teleport to destination", () -> config.swapTeleportToDestination() == ObeliskMode.TELEPORT_TO_DESTINATION);
 		swap("activate", "set destination", () -> config.swapTeleportToDestination() == ObeliskMode.SET_DESTINATION);
+
 		swap("ardougne", "edgeville", config::swapWildernessLever);
+
 		swapContains("attack", target -> target.startsWith("hoop snake"), "stun", config::swapStun);
 		swap("cast", "standard", () -> !shiftModifier() && config.swapSpellbookSwapLeftClick() == SpellbookSwapMode.STANDARD);
 		swap("cast", "ancient", () -> !shiftModifier() && config.swapSpellbookSwapLeftClick() == SpellbookSwapMode.ANCIENT);
 		swap("cast", "arceuus", () -> !shiftModifier() && config.swapSpellbookSwapLeftClick() == SpellbookSwapMode.ARCEUUS);
+
 		swap("open (normal)", "open (private)", config::swapGodWarsDoor);
 		swap("close", "search", config::swapSearch);
 		swap("shut", "search", config::swapSearch);
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
-		swap("talk-to", "trade", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.TRADE);
-		swap("talk-to", "charter", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.CHARTER);
-		swapContains("talk-to", alwaysTrue(), "charter-to", () -> !shiftModifier() && config.swapTraderCrewmemberLeftClick() == CharterShipsMode.LAST_DESTINATION);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
 	}
 
