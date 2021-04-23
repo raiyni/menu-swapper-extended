@@ -25,22 +25,29 @@
 
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ObeliskMode
+public enum ObeliskMode implements SwapMode
 {
 	ACTIVATE("Activate"),
 	TELEPORT_TO_DESTINATION("Teleport to destination"),
 	SET_DESTINATION("Set destination");
 
-	private final String name;
+	private final String option;
 
 	@Override
 	public String toString()
 	{
-		return name;
+		return option;
+	}
+
+	@Override
+	public Predicate<String> checkTarget()
+	{
+		return target -> target.equals("obelisk");
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, SomeZer0
+ * Copyright (c) 2020, Adam <Adam@sigterm.info>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -25,35 +25,15 @@
 package io.ryoung.menuswapperextended;
 
 import java.util.function.Predicate;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+import java.util.function.Supplier;
+import lombok.Value;
 
-@Getter
-@RequiredArgsConstructor
-public enum SpellbookSwapMode implements SwapMode
+@Value
+class Swap
 {
-	CAST("Cast"),
-	STANDARD("Standard"),
-	ANCIENT("Ancient"),
-	ARCEUUS("Arceuus");
-
-	private final String option;
-
-	@Override
-	public String toString()
-	{
-		return option;
-	}
-
-	@Override
-	public boolean checkShift()
-	{
-		return true;
-	}
-
-	@Override
-	public Predicate<String> checkTarget()
-	{
-		return target -> target.startsWith("spellbook swap");
-	}
+	private Predicate<String> optionPredicate;
+	private Predicate<String> targetPredicate;
+	private String swappedOption;
+	private Supplier<Boolean> enabled;
+	private boolean strict;
 }

@@ -1,5 +1,9 @@
 /*
  * Copyright (c) 2019, Ron Young <https://github.com/raiyni>
+ * Copyright (c) 2021, Truth Forger <https://github.com/Blackberry0Pie>
+ * Copyright (c) 2018, Adam <Adam@sigterm.info>
+ * Copyright (c) 2018, Kamiel
+ * Copyright (c) 2019, Rami <https://github.com/Rami-J>
  * All rights reserved.
  *
  *  Redistribution and use in source and binary forms, with or without
@@ -25,25 +29,31 @@
 
 package io.ryoung.menuswapperextended;
 
+import com.google.common.annotations.VisibleForTesting;
+import static com.google.common.base.Predicates.alwaysTrue;
+import static com.google.common.base.Predicates.equalTo;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.LinkedHashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.inject.Provides;
-import java.awt.event.KeyEvent;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
 import javax.inject.Inject;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
+import net.runelite.api.KeyCode;
 import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.NPC;
 import net.runelite.api.events.ClientTick;
-import net.runelite.api.events.FocusChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
-import net.runelite.client.input.KeyListener;
-import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.util.Text;
@@ -52,7 +62,7 @@ import net.runelite.client.util.Text;
 @PluginDescriptor(
 	name = "Menu Swapper Extended"
 )
-public class MenuSwapperPlugin extends Plugin implements KeyListener
+public class MenuSwapperPlugin extends Plugin
 {
 	private static final Set<MenuAction> NPC_MENU_TYPES = ImmutableSet.of(
 		MenuAction.NPC_FIRST_OPTION,
@@ -68,10 +78,8 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 	@Inject
 	private MenuSwapperConfig config;
 
-	@Inject
-	private KeyManager keyManager;
-
-	private boolean shiftHeld = false;
+	private final Multimap<String, Swap> swaps = LinkedHashMultimap.create();
+	private final ArrayListMultimap<String, Integer> optionIndexes = ArrayListMultimap.create();
 
 	@Provides
 	MenuSwapperConfig provideConfig(ConfigManager configManager)
@@ -82,20 +90,131 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 	@Override
 	public void startUp()
 	{
-		shiftHeld = false;
-		keyManager.registerKeyListener(this);
+		setupSwaps();
 	}
 
 	@Override
 	public void shutDown()
 	{
-		shiftHeld = false;
-		keyManager.unregisterKeyListener(this);
+		swaps.clear();
 	}
 
-	private final ArrayListMultimap<String, Integer> optionIndexes = ArrayListMultimap.create();
+	@VisibleForTesting
+	void setupSwaps()
+	{
+		swap("talk-to", "buy-plank", config::swapPlank);
+		swap("talk-to", "claim", config::claimDynamite);
+		swap("talk-to", "story", config::swapMinigames);
+		swap("talk-to", "dream", config::swapMinigames);
+		swap("talk-to", "escort", config::swapMinigames);
+		swap("talk-to", "join", config::swapMinigames);
+		swap("talk-to", "priestess zul-gwenwynig", "collect", config::swapZulrahCollect);
+		swap("talk-to", "trade-builders-store", config::swapStore);
+		swap("talk-to", "give-sword", config::swapGiveSword);
+		swap("talk-to", "spellbook", config::swapTyssSpellbook);
 
-	@Subscribe(priority = 10)
+		swapMode("talk-to", ZahurMode.class, config::swapZahur);
+		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
+
+		swap("wear", "tele to poh", () -> !shiftModifier() && config.swapConsCape());
+
+		swapMode("wear", KaramjaGlovesMode.class, config::swapKaramjaGlovesLeftClick);
+		swapMode("wear", DesertAmuletMode.class, config::swapDesertAmuletLeftClick);
+		swapMode("wear", MorytaniaLegsMode.class, config::swapMorytaniaLegsLeftClick);
+		swapMode("wear", ArdougneCloakMode.class, config::swapArdougneCloakLeftClick);
+		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
+		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
+		swapMode("activate", ObeliskMode.class, config::swapTeleportToDestination);
+
+		swap("ardougne", "edgeville", config::swapWildernessLever);
+
+		swapContains("attack", target -> target.startsWith("hoop snake"), "stun", config::swapStun);
+
+		swapMode("cast", SpellbookSwapMode.class, config::swapSpellbookSwapLeftClick);
+
+		swap("open (normal)", "open (private)", config::swapGodWarsDoor);
+		swap("close", "search", config::swapSearch);
+		swap("shut", "search", config::swapSearch);
+		swap("shoo-away", "pet", config::swapStrayDog);
+		swap("standard", "slayer", config::dagganothKingsLadder);
+		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
+	}
+
+	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
+	{
+		for (T e : mode.getEnumConstants())
+		{
+			swaps.put(option, new Swap(
+				alwaysTrue(),
+				e.checkTarget(),
+				e.getOption().toLowerCase(),
+				() -> (!e.checkShift() || (e.checkShift() && !shiftModifier())) & e == enumGet.get(),
+				e.strict()
+			));
+		}
+	}
+
+	private void swap(String option, String swappedOption, Supplier<Boolean> enabled)
+	{
+		swap(option, alwaysTrue(), swappedOption, enabled);
+	}
+
+	private void swap(String option, String target, String swappedOption, Supplier<Boolean> enabled)
+	{
+		swap(option, equalTo(target), swappedOption, enabled);
+	}
+
+	private void swap(String option, Predicate<String> targetPredicate, String swappedOption, Supplier<Boolean> enabled)
+	{
+		swaps.put(option, new Swap(alwaysTrue(), targetPredicate, swappedOption, enabled, true));
+	}
+
+	private void swapContains(String option, Predicate<String> targetPredicate, String swappedOption, Supplier<Boolean> enabled)
+	{
+		swaps.put(option, new Swap(alwaysTrue(), targetPredicate, swappedOption, enabled, false));
+	}
+
+	private void swapMenuEntry(int index, MenuEntry menuEntry)
+	{
+		final int eventId = menuEntry.getIdentifier();
+		final MenuAction menuAction = MenuAction.of(menuEntry.getType());
+		final String option = Text.removeTags(menuEntry.getOption()).toLowerCase();
+		final String target = Text.removeTags(menuEntry.getTarget()).toLowerCase();
+		final NPC hintArrowNpc = client.getHintArrowNpc();
+
+		if (hintArrowNpc != null
+			&& hintArrowNpc.getIndex() == eventId
+			&& NPC_MENU_TYPES.contains(menuAction))
+		{
+			return;
+		}
+
+		if (shiftModifier() && (menuAction == MenuAction.ITEM_FIRST_OPTION
+			|| menuAction == MenuAction.ITEM_SECOND_OPTION
+			|| menuAction == MenuAction.ITEM_THIRD_OPTION
+			|| menuAction == MenuAction.ITEM_FOURTH_OPTION
+			|| menuAction == MenuAction.ITEM_FIFTH_OPTION
+			|| menuAction == MenuAction.ITEM_USE))
+		{
+			// don't perform swaps on items when shift is held; instead prefer the client menu swap, which
+			// we may have overwrote
+			return;
+		}
+
+		Collection<Swap> swaps = this.swaps.get(option);
+		for (Swap swap : swaps)
+		{
+			if (swap.getTargetPredicate().test(target) && swap.getEnabled().get())
+			{
+				if (swap(swap.getSwappedOption(), target, index, swap.isStrict()))
+				{
+					break;
+				}
+			}
+		}
+	}
+
+	@Subscribe
 	public void onClientTick(ClientTick clientTick)
 	{
 		// The menu is not rebuilt when it is open, so don't swap or else it will
@@ -124,228 +243,20 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		}
 	}
 
-	private void swapMenuEntry(int index, MenuEntry menuEntry)
-	{
-		final int eventId = menuEntry.getIdentifier();
-		final String option = Text.removeTags(menuEntry.getOption()).toLowerCase();
-		final String target = Text.removeTags(menuEntry.getTarget()).toLowerCase();
-		final NPC hintArrowNpc = client.getHintArrowNpc();
-
-		if (hintArrowNpc != null
-			&& hintArrowNpc.getIndex() == eventId
-			&& NPC_MENU_TYPES.contains(MenuAction.of(menuEntry.getType())))
-		{
-			return;
-		}
-
-		if (option.equals("talk-to"))
-		{
-			if (config.swapPlank() && target.equals("sawmill operator"))
-			{
-				swap("buy-plank", option, target, index);
-			}
-
-			if (config.claimDynamite() && target.contains("thirus"))
-			{
-				swap("claim", option, target, index);
-			}
-
-			if (config.swapMinigames())
-			{
-				swap("story", option, target, index);
-				swap("start-minigame", option, target, index);
-				swap("dream", option, target, index);
-				swap("escort", option, target, index);
-				swap("join", option, target, index);
-			}
-
-			if (config.swapSendParcel())
-			{
-				swap("send-parcel", option, target, index);
-			}
-
-			if (config.swapZulrahCollect() && target.equals("priestess zul-gwenwynig"))
-			{
-				swap("collect", option, target, index);
-			}
-
-			if (config.swapStore())
-			{
-				swap("trade-builders-store", option, target, index);
-			}
-
-			if (config.swapGiveSword())
-			{
-				swap("give-sword", option, target, index);
-			}
-
-			if (config.swapTyssSpellbook())
-			{
-				swap("spellbook", option, target, index);
-			}
-		}
-		else if (!shiftHeld && option.equals("wear"))
-		{
-			if (config.swapConsCape() && (target.startsWith("construct. cape")))
-			{
-				swap("tele to poh", option, target, index);
-			}
-			else if (target.startsWith("karamja gloves"))
-			{
-				swap(config.swapKaramjaGlovesLeftClick().getOption().toLowerCase(), option, target, index);
-			}
-			else if (target.startsWith("desert amulet"))
-			{
-				swap(config.swapDesertAmuletLeftClick().getOption().toLowerCase(), option, target, index);
-			}
-			else if (target.startsWith("morytania legs"))
-			{
-				swap(config.swapMorytaniaLegsLeftClick().getOption().toLowerCase(), option, target, index);
-			}
-			else if (target.startsWith("ardougne cloak") || target.startsWith("ardougne max cape"))
-			{
-				swap(config.swapArdougneCloakLeftClick().getOption().toLowerCase(), option, target, index);
-			}
-			else if (target.startsWith("drakan's medallion"))
-			{
-				swap(config.swapDrakansMedallionLeftClick().getOption().toLowerCase(), option, target, index);
-			}
-		}
-		else if (option.equals("attack"))
-		{
-			if (config.swapStun() && target.contains("hoop snake"))
-			{
-				swap("stun", option, target, index);
-			}
-		}
-		else if (config.swapSearch() && (option.equals("close") || option.equals("shut")))
-		{
-			swap("search", option, target, index);
-		}
-		else if (config.swapWildernessLever() && option.equals("ardougne") && target.equals("lever"))
-		{
-			swap("edgeville", option, target, index);
-		}
-		else if (target.equals("obelisk"))
-		{
-			switch (config.swapTeleportToDestination())
-			{
-				case SET_DESTINATION:
-					swap("set destination", option, target, index);
-					break;
-				case TELEPORT_TO_DESTINATION:
-					swap("teleport to destination", option, target, index);
-					break;
-			}
-		}
-		else if (config.swapDecant() && target.contains("bob barter"))
-		{
-			swap("decant", option, target, index);
-		}
-		else if (target.equals("zahur"))
-		{
-			swap(config.swapZahur().getOption().toLowerCase(), option, target, index);
-		}
-		else if (config.dagganothKingsLadder() && option.equals("standard") && target.contains("kings' ladder"))
-		{
-			swap("slayer", option, target, index);
-		}
-		else if (!shiftHeld && config.swapTeleCrystal() && option.equals("lletya"))
-		{
-			swap("prifddinas", option, target, index);
-		}
-		else if (!shiftHeld && target.startsWith("pharaoh's sceptre") && option.equals("wield"))
-		{
-			swap(config.swapPharaohSceptreLeftClick().getOption().toLowerCase(), option, target, index);
-		}
-		else if (!shiftHeld && target.startsWith("trader crewmember"))
-		{
-			CharterShipsMode configOption = config.swapTraderCrewmemberLeftClick();
-			if (configOption == CharterShipsMode.LAST_DESTINATION)
-			{
-				swap("charter-to", option, target, index, false);
-			}
-			else
-			{
-				// NOTE: Selecting Talk-To conflicts with Runelites own Menu entry swappers options "Trade" and "Travel"
-				swap(configOption.getOption().toLowerCase(), option, target, index);
-			}
-		}
-		else if (!shiftHeld && target.startsWith("spellbook swap") && option.equals("cast"))
-		{
-			swap(config.swapSpellbookSwapLeftClick().getOption().toLowerCase(), option, target, index);
-		}
-		else if (config.swapGodWarsDoor() && option.equals("open (normal)") && target.contains("big door"))
-		{
-			swap("open (private)", option, target, index);
-		}
-		else if (config.swapStrayDog() && option.equals("shoo-away") && target.contains("stray dog"))
-		{
-			swap("pet", option, target, index);
-		}
-	}
-
-	private int searchIndex(MenuEntry[] entries, String option, String target, boolean strict)
-	{
-		for (int i = entries.length - 1; i >= 0; i--)
-		{
-			MenuEntry entry = entries[i];
-			String entryOption = Text.removeTags(entry.getOption()).toLowerCase();
-			String entryTarget = Text.removeTags(entry.getTarget()).toLowerCase();
-
-			if (strict)
-			{
-				if (entryOption.equals(option) && entryTarget.equals(target))
-				{
-					return i;
-				}
-			}
-			else
-			{
-				if (entryOption.contains(option.toLowerCase()) && entryTarget.equals(target))
-				{
-					return i;
-				}
-			}
-		}
-
-		return -1;
-	}
-
-	private void swap(String optionA, String optionB, String target, int index)
-	{
-		swap(optionA, optionB, target, index, true);
-	}
-
-	private void swap(String optionA, String optionB, String target, int index, boolean strict)
+	private boolean swap(String option, String target, int index, boolean strict)
 	{
 		MenuEntry[] menuEntries = client.getMenuEntries();
 
-		int thisIndex = findIndex(menuEntries, index, optionB, target, strict);
-		int optionIdx = findIndex(menuEntries, thisIndex, optionA, target, strict);
+		// find option to swap with
+		int optionIdx = findIndex(menuEntries, index, option, target, strict);
 
-		if (thisIndex >= 0 && optionIdx >= 0)
+		if (optionIdx >= 0)
 		{
-			swap(optionIndexes, menuEntries, optionIdx, thisIndex);
+			swap(optionIndexes, menuEntries, optionIdx, index);
+			return true;
 		}
-	}
 
-	private void swap(ArrayListMultimap<String, Integer> optionIndexes, MenuEntry[] entries, int index1, int index2)
-	{
-		MenuEntry entry = entries[index1];
-		entries[index1] = entries[index2];
-		entries[index2] = entry;
-
-		client.setMenuEntries(entries);
-
-		// Rebuild option indexes
-		optionIndexes.clear();
-		int idx = 0;
-		for (MenuEntry menuEntry : entries)
-		{
-			String option = Text.removeTags(menuEntry.getOption()).toLowerCase();
-			optionIndexes.put(option, idx++);
-		}
+		return false;
 	}
 
 	private int findIndex(MenuEntry[] entries, int limit, String option, String target, boolean strict)
@@ -363,7 +274,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 				String entryTarget = Text.removeTags(entry.getTarget()).toLowerCase();
 
 				// Limit to the last index which is prior to the current entry
-				if (idx <= limit && entryTarget.equals(target))
+				if (idx < limit && entryTarget.equals(target))
 				{
 					return idx;
 				}
@@ -372,7 +283,7 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		else
 		{
 			// Without strict matching we have to iterate all entries up to the current limit...
-			for (int i = limit; i >= 0; i--)
+			for (int i = limit - 1; i >= 0; i--)
 			{
 				MenuEntry entry = entries[i];
 				String entryOption = Text.removeTags(entry.getOption()).toLowerCase();
@@ -389,53 +300,39 @@ public class MenuSwapperPlugin extends Plugin implements KeyListener
 		return -1;
 	}
 
-	private void swap(String optionA, String optionB, String target, boolean strict)
+	private void swap(ArrayListMultimap<String, Integer> optionIndexes, MenuEntry[] entries, int index1, int index2)
 	{
-		MenuEntry[] entries = client.getMenuEntries();
+		MenuEntry entry1 = entries[index1],
+			entry2 = entries[index2];
 
-		int idxA = searchIndex(entries, optionA, target, strict);
-		int idxB = searchIndex(entries, optionB, target, strict);
+		entries[index1] = entry2;
+		entries[index2] = entry1;
 
-		if (idxA >= 0 && idxB >= 0)
-		{
-			MenuEntry entry = entries[idxA];
-			entries[idxA] = entries[idxB];
-			entries[idxB] = entry;
+		client.setMenuEntries(entries);
 
-			client.setMenuEntries(entries);
-		}
+		// Update optionIndexes
+		String option1 = Text.removeTags(entry1.getOption()).toLowerCase(),
+			option2 = Text.removeTags(entry2.getOption()).toLowerCase();
+
+		List<Integer> list1 = optionIndexes.get(option1),
+			list2 = optionIndexes.get(option2);
+
+		// call remove(Object) instead of remove(int)
+		list1.remove((Integer) index1);
+		list2.remove((Integer) index2);
+
+		sortedInsert(list1, index2);
+		sortedInsert(list2, index1);
 	}
 
-	@Override
-	public void keyTyped(KeyEvent e)
+	private static <T extends Comparable<? super T>> void sortedInsert(List<T> list, T value) // NOPMD: UnusedPrivateMethod: false positive
 	{
+		int idx = Collections.binarySearch(list, value);
+		list.add(idx < 0 ? -idx - 1 : idx, value);
 	}
 
-	@Override
-	public void keyPressed(KeyEvent e)
+	private boolean shiftModifier()
 	{
-		if (e.getKeyCode() == KeyEvent.VK_SHIFT)
-		{
-			shiftHeld = true;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e)
-	{
-		if (e.getKeyCode() == KeyEvent.VK_SHIFT)
-		{
-			shiftHeld = false;
-		}
-	}
-
-	@Subscribe
-	public void onFocusChanged(FocusChanged event)
-	{
-		if (!event.isFocused())
-		{
-			shiftHeld = false;
-		}
+		return client.isKeyPressed(KeyCode.KC_SHIFT);
 	}
 }
-
