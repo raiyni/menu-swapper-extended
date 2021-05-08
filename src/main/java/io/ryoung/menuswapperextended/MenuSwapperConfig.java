@@ -335,4 +335,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+			keyName = "swapFremennikSeaBootsLeftClick",
+			name = "Fremennik Sea Boots",
+			description = "Change the left-click option on Fremennik Sea Boots",
+			section = itemSection
+	)
+	default FremennikSeaBootsMode swapFremennikSeaBootsLeftClick()
+	{
+		return FremennikSeaBootsMode.WEAR;
+	}
 }
