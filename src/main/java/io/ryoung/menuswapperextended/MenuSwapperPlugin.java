@@ -125,6 +125,7 @@ public class MenuSwapperPlugin extends Plugin
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
 		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
+		swapMode("wield", SilverSickleMode.class, config::swapSilverSickleLeftClick);
 		swapMode("activate", ObeliskMode.class, config::swapTeleportToDestination);
 
 		swap("ardougne", "edgeville", config::swapWildernessLever);

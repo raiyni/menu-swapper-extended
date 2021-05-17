@@ -346,4 +346,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return FremennikSeaBootsMode.WEAR;
 	}
+
+	@ConfigItem(
+			keyName = "swapSilverSickleLeftClick",
+			name = "Silver Sickle (b)",
+			description = "Change the left-click option on Silver Sickle(b)",
+			section = itemSection
+	)
+	default SilverSickleMode swapSilverSickleLeftClick()
+	{
+		return SilverSickleMode.WIELD;
+	}
 }
