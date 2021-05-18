@@ -348,12 +348,12 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "silverSickleCastBloom",
-			name = "Silver Sickle (b): Cast Bloom",
-			description = "Change the left click option to Cast Bloom for the Silver Sickle (b).",
+			keyName = "castBloom",
+			name = "Cast Bloom",
+			description = "Change the left click option to Cast Bloom for sickles.",
 			section = itemSection
 	)
-	default boolean silverSickleCastBloom()
+	default boolean castBloom()
 	{
 		return false;
 	}
