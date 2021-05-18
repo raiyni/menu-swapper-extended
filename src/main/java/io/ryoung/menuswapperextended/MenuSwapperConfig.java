@@ -346,4 +346,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return FremennikSeaBootsMode.WEAR;
 	}
+
+	@ConfigItem(
+			keyName = "castBloom",
+			name = "Cast Bloom",
+			description = "Change the left click option to Cast Bloom for sickles.",
+			section = itemSection
+	)
+	default boolean castBloom()
+	{
+		return false;
+	}
 }
