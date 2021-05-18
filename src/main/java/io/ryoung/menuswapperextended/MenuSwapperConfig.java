@@ -348,13 +348,13 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "swapSilverSickleLeftClick",
-			name = "Silver Sickle (b)",
-			description = "Change the left-click option on Silver Sickle(b)",
+			keyName = "silverSickleCastBloom",
+			name = "Silver Sickle (b): Cast Bloom",
+			description = "Change the left click option to Cast Bloom for the Silver Sickle (b).",
 			section = itemSection
 	)
-	default SilverSickleMode swapSilverSickleLeftClick()
+	default boolean silverSickleCastBloom()
 	{
-		return SilverSickleMode.WIELD;
+		return false;
 	}
 }

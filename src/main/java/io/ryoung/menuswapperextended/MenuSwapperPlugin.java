@@ -125,7 +125,6 @@ public class MenuSwapperPlugin extends Plugin
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
 		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
-		swapMode("wield", SilverSickleMode.class, config::swapSilverSickleLeftClick);
 		swapMode("activate", ObeliskMode.class, config::swapTeleportToDestination);
 
 		swap("ardougne", "edgeville", config::swapWildernessLever);
@@ -140,6 +139,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
+		swap("wield", "cast bloom", config::silverSickleCastBloom);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
