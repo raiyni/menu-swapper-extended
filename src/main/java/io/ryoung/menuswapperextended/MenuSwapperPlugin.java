@@ -104,6 +104,7 @@ public class MenuSwapperPlugin extends Plugin
 	{
 		swap("talk-to", "buy-plank", config::swapPlank);
 		swap("talk-to", "claim", config::claimDynamite);
+		swap("talk-to", "decant", config::swapDecant);
 		swap("talk-to", "story", config::swapMinigames);
 		swap("talk-to", "dream", config::swapMinigames);
 		swap("talk-to", "escort", config::swapMinigames);

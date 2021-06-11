@@ -117,6 +117,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "swapDecant",
+		name = "Decant",
+		description = "Swap Talk-to with Decant on Bob Barter (herbs)",
+		section = npcSection
+	)
+	default boolean swapDecant()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "swapWildernessLever",
 		name = "Wilderness Lever to Edgeville",
 		description = "Swap Edgeville Lever as default for wilderness lever",
