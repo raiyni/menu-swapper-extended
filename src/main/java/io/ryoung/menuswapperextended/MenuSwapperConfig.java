@@ -260,6 +260,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "swapDwarvenRockCake",
+		name = "Dwarven Rock Cake",
+		description = "Swaps the Dwarven Rock Cake Eat to Guzzle",
+		section = itemSection
+	)
+	default boolean swapDwarvenRockCake()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "swapTraderCrewmemberLeftClick",
 		name = "Charter Ships",
 		description = "Change the left-click option on Trader Crewmembers on Charter ships",
