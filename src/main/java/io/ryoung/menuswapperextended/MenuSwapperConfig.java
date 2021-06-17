@@ -404,7 +404,7 @@ public interface MenuSwapperConfig extends Config
 
 	@ConfigItem(
 			keyName = "kharedstsMemoirs",
-			name = "Kharesdt's Memoirs KBD",
+			name = "Kharesdt's Memoirs Reminisce",
 			description = "Change the left click option to Reminisce for Kharedst's Memoirs.",
 			section = itemSection
 	)
