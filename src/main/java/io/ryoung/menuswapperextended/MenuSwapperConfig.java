@@ -409,5 +409,12 @@ public interface MenuSwapperConfig extends Config
 			section = itemSection
 	)
 	default boolean kharedstsMemoirs() {return false;}
+	@ConfigItem(
+			keyName = "templeTrekkking",
+			name = "Temple Trekking Continue-trek",
+			description = "Change the left click option to Continue-Trek for Temple Trekking.",
+			section = uiSection
+	)
+	default boolean templeTrekkking() {return false;}
 }
 
