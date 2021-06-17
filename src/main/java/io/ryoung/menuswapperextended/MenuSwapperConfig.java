@@ -379,4 +379,26 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+			keyName = "swapMythicalCapeLeftClick",
+			name = "Mythical Cape",
+			description = "Change the left-click option on Mythical capes",
+			section = itemSection
+	)
+	default MythicalCapeMode swapMythicalCapeLeftClick()
+	{
+		return MythicalCapeMode.TELEPORT;
+	}
+
+	@ConfigItem(
+			keyName = "privateKBD",
+			name = "Private KBD",
+			description = "Change the left click option to private for KKB.",
+			section = objectSection
+	)
+	default boolean privateKBD()
+	{
+		return false;
+	}
 }

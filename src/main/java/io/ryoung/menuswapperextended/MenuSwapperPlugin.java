@@ -142,6 +142,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
 		swap("shake", "snow", config::snowSnowglobe);
 		swap("activate", "quick-exit", config::quickexitSepulchre);
+		swap("pull", "private", config::privateKBD);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
