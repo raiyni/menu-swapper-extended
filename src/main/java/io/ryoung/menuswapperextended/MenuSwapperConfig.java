@@ -401,7 +401,6 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
-
 	@ConfigItem(
 			keyName = "kharedstsMemoirs",
 			name = "Kharesdt's Memoirs Reminisce",
@@ -416,5 +415,12 @@ public interface MenuSwapperConfig extends Config
 			section = uiSection
 	)
 	default boolean templeTrekkking() {return false;}
+	@ConfigItem(
+			keyName = "pickDoor",
+			name = "Door Pick-Lock",
+			description = "Change the left click option to Pick-Lock for doors.",
+			section = objectSection
+	)
+	default boolean pickDoor() {return false;}
 }
 

@@ -145,6 +145,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("pull", "private", config::privateKBD);
 		swap("wield", "reminisce", config::kharedstsMemoirs);
 		swap("look-at", "continue-trek", config::templeTrekkking);
+		swap("open", "pick-lock", config::pickDoor);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
