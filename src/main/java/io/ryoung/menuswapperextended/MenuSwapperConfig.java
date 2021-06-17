@@ -367,5 +367,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+	@ConfigItem(
+			keyName = "quickexitSepulchre",
+			name = "Quick-Exit Sepulchre",
+			description = "Change the left click option to quick-exit for Magical Obelisk in Sepulchre.",
+			section = objectSection
+	)
+	default boolean quickexitSepulchre()
+	{
+		return false;
+	}
 }
 
