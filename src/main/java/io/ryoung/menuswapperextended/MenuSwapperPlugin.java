@@ -144,7 +144,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
-		swap("shake", "snow", config::snowSnowglobe);
+		swap("look", "snow", config::snowSnowglobe);
 		swap("activate", "quick-exit", config::quickexitSepulchre);
 		swap("pull", "private", config::privateKBD);
 		swap("wield", "reminisce", config::kharedstsMemoirs);
