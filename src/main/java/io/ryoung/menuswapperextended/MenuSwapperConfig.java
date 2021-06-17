@@ -422,5 +422,26 @@ public interface MenuSwapperConfig extends Config
 			section = objectSection
 	)
 	default boolean pickDoor() {return false;}
+	@ConfigItem(
+			keyName = "collectRantz",
+			name = "Rantz Collect",
+			description = "Change the left click option to collect for NPC Rantz.",
+			section = npcSection
+	)
+	default boolean collectRantz() {return false;}
+	@ConfigItem(
+			keyName = "sandBert",
+			name = "Bert Sand",
+			description = "Change the left click option to Sand for NPC bert",
+			section = npcSection
+	)
+	default boolean sandBert() {return false;}
+	@ConfigItem(
+			keyName = "kittenGertrude",
+			name = "Gertrude Kitten",
+			description = "Change the left click option to Kitten for NPC Gertrude",
+			section = npcSection
+	)
+	default boolean kittenGertrude() {return false;}
 }
 

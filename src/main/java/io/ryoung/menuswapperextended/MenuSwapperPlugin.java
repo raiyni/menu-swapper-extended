@@ -140,12 +140,15 @@ public class MenuSwapperPlugin extends Plugin
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
-		swap("shake", "snow", config::snowSnowglobe);
-		swap("activate", "quick-exit", config::quickexitSepulchre);
-		swap("pull", "private", config::privateKBD);
-		swap("wield", "reminisce", config::kharedstsMemoirs);
-		swap("look-at", "continue-trek", config::templeTrekkking);
-		swap("open", "pick-lock", config::pickDoor);
+		swap("shake", "snow", config::snowSnowglobe);//not checked
+		swap("activate", "quick-exit", config::quickexitSepulchre);//not checked
+		swap("pull", "private", config::privateKBD);//not checked
+		swap("wield", "reminisce", config::kharedstsMemoirs);//not checked
+		swap("look-at", "continue-trek", config::templeTrekkking);//not checked
+		swap("open", "pick-lock", config::pickDoor); //not checked
+		swap("talk-to", "sand", config::sandBert); //checked
+		swap("talk-to", "collect", config::collectRantz);//not checked
+		swap("talk-to", "Kitten", config::kittenGertrude);//checked
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
