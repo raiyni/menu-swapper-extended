@@ -357,4 +357,15 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+	@ConfigItem(
+			keyName = "snowSnowglobe",
+			name = "Snow Snow Globe",
+			description = "Change the left click option to Snow for Snow Globes.",
+			section = itemSection
+	)
+	default boolean snowSnowglobe()
+	{
+		return false;
+	}
 }
+
