@@ -357,4 +357,25 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+	@ConfigItem(
+			keyName = "snowSnowglobe",
+			name = "Snow Snow Globe",
+			description = "Change the left click option to Snow for Snow Globes.",
+			section = itemSection
+	)
+	default boolean snowSnowglobe()
+	{
+		return false;
+	}
+	@ConfigItem(
+			keyName = "quickexitSepulchre",
+			name = "Quick-Exit Sepulchre",
+			description = "Change the left click option to quick-exit for Magical Obelisk in Sepulchre.",
+			section = objectSection
+	)
+	default boolean quickexitSepulchre()
+	{
+		return false;
+	}
 }
+
