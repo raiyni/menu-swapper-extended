@@ -33,7 +33,7 @@ import java.util.function.Predicate;
 @RequiredArgsConstructor
 public enum MythicalCapeMode implements SwapMode
 {
- 	WEAR("Wear"),
+	WEAR("Wear"),
 	TELEPORT("Teleport"),
 	USE("Use"),
 	DROP("Drop"),

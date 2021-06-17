@@ -30,13 +30,16 @@
 package io.ryoung.menuswapperextended;
 
 import com.google.common.annotations.VisibleForTesting;
+
 import static com.google.common.base.Predicates.alwaysTrue;
 import static com.google.common.base.Predicates.equalTo;
+
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Provides;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -44,6 +47,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import javax.inject.Inject;
+
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.Client;
 import net.runelite.api.GameState;
@@ -140,15 +144,15 @@ public class MenuSwapperPlugin extends Plugin
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
-		swap("shake", "snow", config::snowSnowglobe);//not checked
-		swap("activate", "quick-exit", config::quickexitSepulchre);//not checked
-		swap("pull", "private", config::privateKBD);//not checked
-		swap("wield", "reminisce", config::kharedstsMemoirs);//not checked
-		swap("look-at", "continue-trek", config::templeTrekkking);//not checked
-		swap("open", "pick-lock", config::pickDoor); //not checked
-		swap("talk-to", "sand", config::sandBert); //checked
-		swap("talk-to", "collect", config::collectRantz);//not checked
-		swap("talk-to", "Kitten", config::kittenGertrude);//checked
+		swap("shake", "snow", config::snowSnowglobe);
+		swap("activate", "quick-exit", config::quickexitSepulchre);
+		swap("pull", "private", config::privateKBD);
+		swap("wield", "reminisce", config::kharedstsMemoirs);
+		swap("look-at", "continue-trek", config::templeTrekkking);
+		swap("open", "pick-lock", config::pickDoor);
+		swap("talk-to", "sand", config::sandBert);
+		swap("talk-to", "collect", config::collectRantz);
+		swap("talk-to", "Kitten", config::kittenGertrude);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)

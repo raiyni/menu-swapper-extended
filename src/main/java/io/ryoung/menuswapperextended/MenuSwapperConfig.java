@@ -381,10 +381,10 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "swapMythicalCapeLeftClick",
-			name = "Mythical Cape",
-			description = "Change the left-click option on Mythical capes",
-			section = itemSection
+		keyName = "swapMythicalCapeLeftClick",
+		name = "Mythical Cape",
+		description = "Change the left-click option on Mythical capes",
+		section = itemSection
 	)
 	default MythicalCapeMode swapMythicalCapeLeftClick()
 	{
@@ -392,56 +392,80 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "privateKBD",
-			name = "Private KBD",
-			description = "Change the left click option to private for KKB.",
-			section = objectSection
+		keyName = "privateKBD",
+		name = "Private KBD",
+		description = "Change the left click option to private for KKB.",
+		section = objectSection
 	)
 	default boolean privateKBD()
 	{
 		return false;
 	}
+
 	@ConfigItem(
-			keyName = "kharedstsMemoirs",
-			name = "Kharesdt's Memoirs Reminisce",
-			description = "Change the left click option to Reminisce for Kharedst's Memoirs.",
-			section = itemSection
+		keyName = "kharedstsMemoirs",
+		name = "Kharesdt's Memoirs Reminisce",
+		description = "Change the left click option to Reminisce for Kharedst's Memoirs.",
+		section = itemSection
 	)
-	default boolean kharedstsMemoirs() {return false;}
+	default boolean kharedstsMemoirs()
+	{
+		return false;
+	}
+
 	@ConfigItem(
-			keyName = "templeTrekkking",
-			name = "Temple Trekking Continue-trek",
-			description = "Change the left click option to Continue-Trek for Temple Trekking.",
-			section = uiSection
+		keyName = "templeTrekkking",
+		name = "Temple Trekking Continue-trek",
+		description = "Change the left click option to Continue-Trek for Temple Trekking.",
+		section = uiSection
 	)
-	default boolean templeTrekkking() {return false;}
+	default boolean templeTrekkking()
+	{
+		return false;
+	}
+
 	@ConfigItem(
-			keyName = "pickDoor",
-			name = "Door Pick-Lock",
-			description = "Change the left click option to Pick-Lock for doors.",
-			section = objectSection
+		keyName = "pickDoor",
+		name = "Door Pick-Lock",
+		description = "Change the left click option to Pick-Lock for doors.",
+		section = objectSection
 	)
-	default boolean pickDoor() {return false;}
+	default boolean pickDoor()
+	{
+		return false;
+	}
+
 	@ConfigItem(
-			keyName = "collectRantz",
-			name = "Rantz Collect",
-			description = "Change the left click option to collect for NPC Rantz.",
-			section = npcSection
+		keyName = "collectRantz",
+		name = "Rantz Collect",
+		description = "Change the left click option to collect for NPC Rantz.",
+		section = npcSection
 	)
-	default boolean collectRantz() {return false;}
+	default boolean collectRantz()
+	{
+		return false;
+	}
+
 	@ConfigItem(
-			keyName = "sandBert",
-			name = "Bert Sand",
-			description = "Change the left click option to Sand for NPC bert",
-			section = npcSection
+		keyName = "sandBert",
+		name = "Bert Sand",
+		description = "Change the left click option to Sand for NPC bert",
+		section = npcSection
 	)
-	default boolean sandBert() {return false;}
+	default boolean sandBert()
+	{
+		return false;
+	}
+
 	@ConfigItem(
-			keyName = "kittenGertrude",
-			name = "Gertrude Kitten",
-			description = "Change the left click option to Kitten for NPC Gertrude",
-			section = npcSection
+		keyName = "kittenGertrude",
+		name = "Gertrude Kitten",
+		description = "Change the left click option to Kitten for NPC Gertrude",
+		section = npcSection
 	)
-	default boolean kittenGertrude() {return false;}
+	default boolean kittenGertrude()
+	{
+		return false;
+	}
 }
 
