@@ -380,4 +380,3 @@ public interface MenuSwapperConfig extends Config
 		return false;
 	}
 }
-
