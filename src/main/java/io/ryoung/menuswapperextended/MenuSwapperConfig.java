@@ -401,4 +401,13 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+			keyName = "kharedstsMemoirs",
+			name = "Kharesdt's Memoirs KBD",
+			description = "Change the left click option to Reminisce for Kharedst's Memoirs.",
+			section = itemSection
+	)
+	default boolean kharedstsMemoirs() {return false;}
 }
+
