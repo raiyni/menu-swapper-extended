@@ -112,6 +112,9 @@ public class MenuSwapperPlugin extends Plugin
 		swap("talk-to", "trade-builders-store", config::swapStore);
 		swap("talk-to", "give-sword", config::swapGiveSword);
 		swap("talk-to", "spellbook", config::swapTyssSpellbook);
+		swap("talk-to", "sand", config::sandBert);
+		swap("talk-to", "collect", config::collectRantz);
+		swap("talk-to", "Kitten", config::kittenGertrude);
 
 		swapMode("talk-to", ZahurMode.class, config::swapZahur);
 		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
@@ -124,6 +127,7 @@ public class MenuSwapperPlugin extends Plugin
 		swapMode("wear", ArdougneCloakMode.class, config::swapArdougneCloakLeftClick);
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
+		swapMode("wear", MythicalCapeMode.class, config::swapMythicalCapeLeftClick);
 		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
 		swap("wield", "cast bloom", config::castBloom);
 		swapMode("activate", ObeliskMode.class, config::swapTeleportToDestination);
@@ -140,8 +144,11 @@ public class MenuSwapperPlugin extends Plugin
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());
-		swap("shake", "snow", config::snowSnowglobe);
 		swap("activate", "quick-exit", config::quickexitSepulchre);
+		swap("pull", "private", config::privateKBD);
+		swap("wield", "reminisce", config::kharedstsMemoirs);
+		swap("look-at", "continue-trek", config::templeTrekkking);
+		swap("look at", "snow", config::snowSnowglobe);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
