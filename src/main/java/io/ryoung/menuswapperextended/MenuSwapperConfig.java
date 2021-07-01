@@ -388,7 +388,7 @@ public interface MenuSwapperConfig extends Config
 	)
 	default MythicalCapeMode swapMythicalCapeLeftClick()
 	{
-		return MythicalCapeMode.TELEPORT;
+		return MythicalCapeMode.WEAR;
 	}
 
 	@ConfigItem(
