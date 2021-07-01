@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum ArdougneCloakMode implements SwapMode
 {
- 	WEAR("Wear"),
+	WEAR("Wear"),
 	MONASTERY_TELEPORT("Monastery Teleport"),
 	FARM_TELEPORT("Farm Teleport");
 

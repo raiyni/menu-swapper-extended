@@ -29,15 +29,18 @@ import java.util.function.Predicate;
 
 public interface SwapMode
 {
-	default boolean strict() {
+	default boolean strict()
+	{
 		return true;
 	}
 
-	default boolean checkShift() {
+	default boolean checkShift()
+	{
 		return false;
 	}
 
-	default Predicate<String> checkTarget() {
+	default Predicate<String> checkTarget()
+	{
 		return s -> true;
 	}
 

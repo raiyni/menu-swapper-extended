@@ -337,10 +337,10 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "swapFremennikSeaBootsLeftClick",
-			name = "Fremennik Sea Boots",
-			description = "Change the left-click option on Fremennik Sea Boots",
-			section = itemSection
+		keyName = "swapFremennikSeaBootsLeftClick",
+		name = "Fremennik Sea Boots",
+		description = "Change the left-click option on Fremennik Sea Boots",
+		section = itemSection
 	)
 	default FremennikSeaBootsMode swapFremennikSeaBootsLeftClick()
 	{
@@ -348,30 +348,32 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "castBloom",
-			name = "Cast Bloom",
-			description = "Change the left click option to Cast Bloom for sickles.",
-			section = itemSection
+		keyName = "castBloom",
+		name = "Cast Bloom",
+		description = "Change the left click option to Cast Bloom for sickles.",
+		section = itemSection
 	)
 	default boolean castBloom()
 	{
 		return false;
 	}
+
 	@ConfigItem(
-			keyName = "snowSnowglobe",
-			name = "Snow Snow Globe",
-			description = "Change the left click option to Snow for Snow Globes.",
-			section = itemSection
+		keyName = "snowSnowglobe",
+		name = "Snow Snow Globe",
+		description = "Change the left click option to Snow for Snow Globes.",
+		section = itemSection
 	)
 	default boolean snowSnowglobe()
 	{
 		return false;
 	}
+
 	@ConfigItem(
-			keyName = "quickexitSepulchre",
-			name = "Quick-Exit Sepulchre",
-			description = "Change the left click option to quick-exit for Magical Obelisk in Sepulchre.",
-			section = objectSection
+		keyName = "quickexitSepulchre",
+		name = "Quick-Exit Sepulchre",
+		description = "Change the left click option to quick-exit for Magical Obelisk in Sepulchre.",
+		section = objectSection
 	)
 	default boolean quickexitSepulchre()
 	{

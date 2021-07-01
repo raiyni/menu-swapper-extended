@@ -32,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public enum FremennikSeaBootsMode implements SwapMode
 {
- 	WEAR("Wear"),
+	WEAR("Wear"),
 	TELEPORT("Teleport");
 
 	private final String option;
