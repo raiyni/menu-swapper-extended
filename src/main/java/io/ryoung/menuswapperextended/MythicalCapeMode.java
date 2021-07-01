@@ -24,10 +24,9 @@
  */
 package io.ryoung.menuswapperextended;
 
+import java.util.function.Predicate;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.function.Predicate;
 
 @Getter
 @RequiredArgsConstructor
