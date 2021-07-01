@@ -34,10 +34,7 @@ import java.util.function.Predicate;
 public enum MythicalCapeMode implements SwapMode
 {
 	WEAR("Wear"),
-	TELEPORT("Teleport"),
-	USE("Use"),
-	DROP("Drop"),
-	EXAMINE("Examine");
+	TELEPORT("Teleport");
 
 	private final String option;
 
