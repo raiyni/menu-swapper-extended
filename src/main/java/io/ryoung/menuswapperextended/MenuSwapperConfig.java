@@ -425,17 +425,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "pickDoor",
-		name = "Door Pick-Lock",
-		description = "Change the left click option to Pick-Lock for doors.",
-		section = objectSection
-	)
-	default boolean pickDoor()
-	{
-		return false;
-	}
-
-	@ConfigItem(
 		keyName = "collectRantz",
 		name = "Rantz Collect",
 		description = "Change the left click option to collect for NPC Rantz.",

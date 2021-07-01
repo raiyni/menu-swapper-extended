@@ -146,7 +146,6 @@ public class MenuSwapperPlugin extends Plugin
 		swap("pull", "private", config::privateKBD);
 		swap("wield", "reminisce", config::kharedstsMemoirs);
 		swap("look-at", "continue-trek", config::templeTrekkking);
-		swap("open", "pick-lock", config::pickDoor);
 		swap("talk-to", "sand", config::sandBert);
 		swap("talk-to", "collect", config::collectRantz);
 		swap("talk-to", "Kitten", config::kittenGertrude);
