@@ -417,7 +417,7 @@ public interface MenuSwapperConfig extends Config
 		keyName = "templeTrekkking",
 		name = "Temple Trekking Continue-trek",
 		description = "Change the left click option to Continue-Trek for Temple Trekking.",
-		section = uiSection
+		section = objectSection
 	)
 	default boolean templeTrekkking()
 	{
