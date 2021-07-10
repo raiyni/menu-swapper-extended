@@ -456,5 +456,16 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "swapNMZBarrelLeftClick",
+		name = "NMZ Barrel",
+		description = "Change the left-click option on the NMZ barrels",
+		section = objectSection
+	)
+	default NMZBarrelMode swapNMZBarrelLeftClick()
+	{
+		return NMZBarrelMode.CHECK;
+	}
 }
 
