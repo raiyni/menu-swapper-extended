@@ -37,6 +37,8 @@ import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.LinkedHashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.inject.Provides;
+
+import java.awt.event.KeyEvent;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -52,8 +54,11 @@ import net.runelite.api.MenuAction;
 import net.runelite.api.MenuEntry;
 import net.runelite.api.NPC;
 import net.runelite.api.events.ClientTick;
+import net.runelite.api.events.FocusChanged;
 import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
+import net.runelite.client.input.KeyListener;
+import net.runelite.client.input.KeyManager;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
 import net.runelite.client.util.Text;
@@ -62,7 +67,7 @@ import net.runelite.client.util.Text;
 @PluginDescriptor(
 	name = "Menu Swapper Extended"
 )
-public class MenuSwapperPlugin extends Plugin
+public class MenuSwapperPlugin extends Plugin implements KeyListener
 {
 	private static final Set<MenuAction> NPC_MENU_TYPES = ImmutableSet.of(
 		MenuAction.NPC_FIRST_OPTION,
@@ -78,8 +83,13 @@ public class MenuSwapperPlugin extends Plugin
 	@Inject
 	private MenuSwapperConfig config;
 
+	@Inject
+	private KeyManager keyManager;
+
 	private final Multimap<String, Swap> swaps = LinkedHashMultimap.create();
 	private final ArrayListMultimap<String, Integer> optionIndexes = ArrayListMultimap.create();
+
+	private boolean controlHeld = false;
 
 	@Provides
 	MenuSwapperConfig provideConfig(ConfigManager configManager)
@@ -91,12 +101,16 @@ public class MenuSwapperPlugin extends Plugin
 	public void startUp()
 	{
 		setupSwaps();
+		controlHeld = false;
+		keyManager.registerKeyListener(this);
 	}
 
 	@Override
 	public void shutDown()
 	{
 		swaps.clear();
+		controlHeld = false;
+		keyManager.unregisterKeyListener(this);
 	}
 
 	@VisibleForTesting
@@ -149,6 +163,8 @@ public class MenuSwapperPlugin extends Plugin
 		swap("wield", "reminisce", config::kharedstsMemoirs);
 		swap("look-at", "continue-trek", config::templeTrekkking);
 		swap("look at", "snow", config::snowSnowglobe);
+		swap("climb", "climb-up", () -> shiftModifier() && config.swapStairsLadders()); //stair(s|case)*, ladder
+		swap("climb", "climb-down", () -> controlHeld && config.swapStairsLadders());
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
@@ -345,5 +361,36 @@ public class MenuSwapperPlugin extends Plugin
 	private boolean shiftModifier()
 	{
 		return client.isKeyPressed(KeyCode.KC_SHIFT);
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
+	{
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{
+		if (e.getKeyCode() == KeyEvent.VK_CONTROL)
+		{
+			controlHeld = true;
+		}
+	}
+	@Override
+	public void keyReleased(KeyEvent e)
+	{
+		if (e.getKeyCode() == KeyEvent.VK_CONTROL)
+		{
+			controlHeld = false;
+		}
+	}
+
+	@Subscribe
+	public void onFocusChanged(FocusChanged event)
+	{
+		if (!event.isFocused())
+		{
+			controlHeld = false;
+		}
 	}
 }

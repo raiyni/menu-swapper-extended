@@ -456,5 +456,16 @@ public interface MenuSwapperConfig extends Config
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "swapStairsLadders",
+		name = "Stairs and Ladders",
+		description = "Swaps Climb on stairs, staircases, and ladders with Climb-up with shift and Climb-down with control",
+		section = objectSection
+	)
+	default boolean swapStairsLadders()
+	{
+		return false;
+	}
 }
 
