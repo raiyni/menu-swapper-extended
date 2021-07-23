@@ -150,6 +150,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "collectRantz",
+		name = "Collect (Rantz)",
+		description = "Swap Collect with Talk-to for Rantz.",
+		section = npcSection
+	)
+	default boolean collectRantz()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "zahurOption",
 		name = "Zahur",
 		description = "Zahur default option",
@@ -420,17 +431,6 @@ public interface MenuSwapperConfig extends Config
 		section = objectSection
 	)
 	default boolean templeTrekkking()
-	{
-		return false;
-	}
-
-	@ConfigItem(
-		keyName = "collectRantz",
-		name = "Rantz Collect",
-		description = "Change the left click option to collect for NPC Rantz.",
-		section = npcSection
-	)
-	default boolean collectRantz()
 	{
 		return false;
 	}

@@ -110,11 +110,11 @@ public class MenuSwapperPlugin extends Plugin
 		swap("talk-to", "join", config::swapMinigames);
 		swap("talk-to", "join-crew", config::swapMinigames);
 		swap("talk-to", "priestess zul-gwenwynig", "collect", config::swapZulrahCollect);
+		swap("talk-to", "rantz","collect", config::collectRantz);
 		swap("talk-to", "trade-builders-store", config::swapStore);
 		swap("talk-to", "give-sword", config::swapGiveSword);
 		swap("talk-to", "spellbook", config::swapTyssSpellbook);
 		swap("talk-to", "sand", config::sandBert);
-		swap("talk-to", "collect", config::collectRantz);
 		swap("talk-to", "Kitten", config::kittenGertrude);
 
 		swapMode("talk-to", ZahurMode.class, config::swapZahur);
