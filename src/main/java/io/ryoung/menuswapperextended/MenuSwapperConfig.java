@@ -467,5 +467,16 @@ public interface MenuSwapperConfig extends Config
 	{
 		return NMZBarrelMode.CHECK;
 	}
+
+	@ConfigItem(
+		keyName = "translationBookUse",
+		name = "Translation Book Use",
+		description = "Change the left click option to use for translation book from MM2.",
+		section = itemSection
+	)
+	default boolean translationBook()
+	{
+		return false;
+	}
 }
 
