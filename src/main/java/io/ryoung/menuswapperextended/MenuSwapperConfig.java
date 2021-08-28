@@ -467,5 +467,16 @@ public interface MenuSwapperConfig extends Config
 	{
 		return NMZBarrelMode.CHECK;
 	}
+
+	@ConfigItem(
+			keyName = "swapFossilIslandDive",
+			name = "Fossil Island Dive",
+			description = "Change the default option to Dive on the boat going to the Underwater Fossil Island area",
+			section = objectSection
+	)
+	default boolean swapFossilIslandDive()
+	{
+		return false;
+	}
 }
 
