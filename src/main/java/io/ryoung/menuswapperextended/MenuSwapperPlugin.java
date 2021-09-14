@@ -150,6 +150,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("wield", "reminisce", config::kharedstsMemoirs);
 		swap("look-at", "continue-trek", config::templeTrekkking);
 		swap("look at", "snow", config::snowSnowglobe);
+		swap("activate", "use", config::tobCrystal);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
