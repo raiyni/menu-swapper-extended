@@ -120,12 +120,6 @@ public class MenuSwapperPlugin extends Plugin
 		swapMode("talk-to", ZahurMode.class, config::swapZahur);
 		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
 
-		swap("wear", "tele to poh", () -> !shiftModifier() && config.swapConsCape());
-
-		swapMode("wear", KaramjaGlovesMode.class, config::swapKaramjaGlovesLeftClick);
-		swapMode("wear", DesertAmuletMode.class, config::swapDesertAmuletLeftClick);
-		swapMode("wear", MorytaniaLegsMode.class, config::swapMorytaniaLegsLeftClick);
-		swapMode("wear", ArdougneCloakMode.class, config::swapArdougneCloakLeftClick);
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
 		swapMode("wear", MythicalCapeMode.class, config::swapMythicalCapeLeftClick);
