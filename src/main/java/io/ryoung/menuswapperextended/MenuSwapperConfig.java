@@ -326,6 +326,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+			keyName = "tobCrystal",
+			name = "Verzik's Crystal Shard",
+			description = "Change the left click option to Use for Verzik's Crystal Shard.",
+			section = itemSection
+	)
+	default boolean tobCrystal()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "quickexitSepulchre",
 		name = "Quick-Exit Sepulchre",
 		description = "Change the left click option to quick-exit for Magical Obelisk in Sepulchre.",
