@@ -306,7 +306,7 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "castBloom",
 		name = "Cast Bloom",
-		description = "Change the left click option to Cast Bloom for sickles.",
+		description = "Change the left click option to Cast Bloom for sickles and flails.",
 		section = itemSection
 	)
 	default boolean castBloom()
