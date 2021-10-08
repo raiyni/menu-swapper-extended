@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, SomeZer0
+ * Copyright (c) 2021, Scott Brunton <https://github.com/scobrun>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,10 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum DesertAmuletMode implements SwapMode
+public enum MythicalCapeMode implements SwapMode
 {
 	WEAR("Wear"),
-	NARDAH("Nardah"),
-	KALPHITE_CAVE("Kalphite cave");
+	TELEPORT("Teleport");
 
 	private final String option;
 
@@ -45,14 +44,9 @@ public enum DesertAmuletMode implements SwapMode
 	}
 
 	@Override
-	public boolean checkShift()
-	{
-		return true;
-	}
-
-	@Override
 	public Predicate<String> checkTarget()
 	{
-		return target -> target.startsWith("desert amulet");
+		return target -> target.startsWith("mythical cape");
 	}
+
 }

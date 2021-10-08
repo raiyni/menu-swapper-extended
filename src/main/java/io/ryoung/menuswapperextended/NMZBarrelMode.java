@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, SomeZer0
+ * Copyright (c) 2020, Truth Forger <https://github.com/Blackberry0Pie>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -30,11 +30,11 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum ArdougneCloakMode implements SwapMode
+public enum NMZBarrelMode implements SwapMode
 {
- 	WEAR("Wear"),
-	MONASTERY_TELEPORT("Monastery Teleport"),
-	FARM_TELEPORT("Farm Teleport");
+	CHECK("Check"),
+	TAKE("Take"),
+	STORE("Store");
 
 	private final String option;
 
@@ -47,6 +47,9 @@ public enum ArdougneCloakMode implements SwapMode
 	@Override
 	public Predicate<String> checkTarget()
 	{
-		return target -> target.startsWith("ardougne cloak") || target.startsWith("ardougne max cape");
+		return target -> target.equals("super ranging potion")
+				|| target.equals("super magic potion")
+				|| target.equals("overload potion")
+				|| target.equals("absorption potion");
 	}
 }

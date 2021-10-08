@@ -150,6 +150,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "collectRantz",
+		name = "Collect (Rantz)",
+		description = "Swap Collect with Talk-to for Rantz.",
+		section = npcSection
+	)
+	default boolean collectRantz()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "zahurOption",
 		name = "Zahur",
 		description = "Zahur default option",
@@ -183,28 +194,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "swapKaramjaGlovesLeftClick",
-		name = "Karamja Gloves",
-		description = "Change the left-click option on Karamja Gloves",
-		section = itemSection
-	)
-	default KaramjaGlovesMode swapKaramjaGlovesLeftClick()
-	{
-		return KaramjaGlovesMode.WEAR;
-	}
-
-	@ConfigItem(
-		keyName = "swapConsCape",
-		name = "Construction Cape",
-		description = "Change the left-click option on Construction Cape",
-		section = itemSection
-	)
-	default boolean swapConsCape()
-	{
-		return false;
-	}
-
-	@ConfigItem(
 		keyName = "swapTeleCrystal",
 		name = "Teleport Crystal",
 		description = "Swaps the Crystal Seed Teleport to Prifddinas",
@@ -224,39 +213,6 @@ public interface MenuSwapperConfig extends Config
 	default PharaohSceptreMode swapPharaohSceptreLeftClick()
 	{
 		return PharaohSceptreMode.JALSAVRAH;
-	}
-
-	@ConfigItem(
-		keyName = "swapDesertAmuletLeftClick",
-		name = "Desert Amulet",
-		description = "Change the left-click option on Desert Amulet",
-		section = itemSection
-	)
-	default DesertAmuletMode swapDesertAmuletLeftClick()
-	{
-		return DesertAmuletMode.WEAR;
-	}
-
-	@ConfigItem(
-		keyName = "swapMorytaniaLegsLeftClick",
-		name = "Morytania Legs",
-		description = "Change the left-click option on Morytania Legs",
-		section = itemSection
-	)
-	default MorytaniaLegsMode swapMorytaniaLegsLeftClick()
-	{
-		return MorytaniaLegsMode.WEAR;
-	}
-
-	@ConfigItem(
-		keyName = "swapArdougneCloakLeftClick",
-		name = "Ardougne Cloak",
-		description = "Change the left-click option on Ardougne Cloak",
-		section = itemSection
-	)
-	default ArdougneCloakMode swapArdougneCloakLeftClick()
-	{
-		return ArdougneCloakMode.WEAR;
 	}
 
 	@ConfigItem(
@@ -337,10 +293,10 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "swapFremennikSeaBootsLeftClick",
-			name = "Fremennik Sea Boots",
-			description = "Change the left-click option on Fremennik Sea Boots",
-			section = itemSection
+		keyName = "swapFremennikSeaBootsLeftClick",
+		name = "Fremennik Sea Boots",
+		description = "Change the left-click option on Fremennik Sea Boots",
+		section = itemSection
 	)
 	default FremennikSeaBootsMode swapFremennikSeaBootsLeftClick()
 	{
@@ -348,13 +304,124 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "silverSickleCastBloom",
-			name = "Silver Sickle (b): Cast Bloom",
-			description = "Change the left click option to Cast Bloom for the Silver Sickle (b).",
-			section = itemSection
+		keyName = "castBloom",
+		name = "Cast Bloom",
+		description = "Change the left click option to Cast Bloom for sickles.",
+		section = itemSection
 	)
-	default boolean silverSickleCastBloom()
+	default boolean castBloom()
 	{
 		return false;
 	}
+
+	@ConfigItem(
+		keyName = "snowSnowglobe",
+		name = "Snow Snow Globe",
+		description = "Change the left click option to Snow for Snow Globes.",
+		section = itemSection
+	)
+	default boolean snowSnowglobe()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "tobCrystal",
+			name = "Verzik's Crystal Shard",
+			description = "Change the left click option to Use for Verzik's Crystal Shard.",
+			section = itemSection
+	)
+	default boolean tobCrystal()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "quickexitSepulchre",
+		name = "Quick-Exit Sepulchre",
+		description = "Change the left click option to quick-exit for Magical Obelisk in Sepulchre.",
+		section = objectSection
+	)
+	default boolean quickexitSepulchre()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "swapMythicalCapeLeftClick",
+		name = "Mythical Cape",
+		description = "Change the left-click option on Mythical capes",
+		section = itemSection
+	)
+	default MythicalCapeMode swapMythicalCapeLeftClick()
+	{
+		return MythicalCapeMode.WEAR;
+	}
+
+	@ConfigItem(
+		keyName = "privateKBD",
+		name = "Private KBD",
+		description = "Change the left click option to private for KKB.",
+		section = objectSection
+	)
+	default boolean privateKBD()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "kharedstsMemoirs",
+		name = "Kharesdt's Memoirs Reminisce",
+		description = "Change the left click option to Reminisce for Kharedst's Memoirs.",
+		section = itemSection
+	)
+	default boolean kharedstsMemoirs()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "templeTrekkking",
+		name = "Temple Trekking Continue-trek",
+		description = "Change the left click option to Continue-Trek for Temple Trekking.",
+		section = objectSection
+	)
+	default boolean templeTrekkking()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "sandBert",
+		name = "Bert Sand",
+		description = "Change the left click option to Sand for NPC bert",
+		section = npcSection
+	)
+	default boolean sandBert()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "kittenGertrude",
+		name = "Gertrude Kitten",
+		description = "Change the left click option to Kitten for NPC Gertrude",
+		section = npcSection
+	)
+	default boolean kittenGertrude()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+		keyName = "swapNMZBarrelLeftClick",
+		name = "NMZ Barrel",
+		description = "Change the left-click option on the NMZ barrels",
+		section = objectSection
+	)
+	default NMZBarrelMode swapNMZBarrelLeftClick()
+	{
+		return NMZBarrelMode.CHECK;
+	}
 }
+
