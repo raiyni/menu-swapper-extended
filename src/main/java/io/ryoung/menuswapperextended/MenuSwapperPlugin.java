@@ -115,7 +115,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("talk-to", "give-sword", config::swapGiveSword);
 		swap("talk-to", "spellbook", config::swapTyssSpellbook);
 		swap("talk-to", "sand", config::sandBert);
-		swap("talk-to", "Kitten", config::kittenGertrude);
+		swap("talk-to", "kitten", config::kittenGertrude);
 
 		swapMode("talk-to", ZahurMode.class, config::swapZahur);
 		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
