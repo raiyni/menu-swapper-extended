@@ -137,6 +137,7 @@ public class MenuSwapperPlugin extends Plugin
 		swap("open (normal)", "open (private)", config::swapGodWarsDoor);
 		swap("close", "search", config::swapSearch);
 		swap("shut", "search", config::swapSearch);
+		swap("open", "pick-lock", config::swapPickLock);
 		swap("shoo-away", "pet", config::swapStrayDog);
 		swap("standard", "slayer", config::dagganothKingsLadder);
 		swap("lletya", "prifddinas", () -> !shiftModifier() && config.swapTeleCrystal());

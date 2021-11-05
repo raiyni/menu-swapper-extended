@@ -84,6 +84,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "swapPickLock",
+		name = "Pick-lock",
+		description = "Swap Open with Pick-lock on chests",
+		section = objectSection
+	)
+	default boolean swapPickLock()
+	{
+		return false;
+	}
+
+	@ConfigItem(
 		keyName = "swapBuyPlank",
 		name = "Buy-Plank",
 		description = "Swap Talk-to with Buy-Plank on Sawmill Operator",
