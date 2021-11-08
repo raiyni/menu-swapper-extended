@@ -425,14 +425,24 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-			keyName = "pyramidPlunderUrns",
-			name = "Pyramid Plunder Urns",
-			description = "Change the left-click option to Check for Snakes.",
+			keyName = "pyramidPlunderSnakeCheck",
+			name = "Pyramid Plunder Check for Snake",
+			description = "Change the Urn left-click option to Check for Snakes.",
 			section = objectSection
 	)
-	default boolean pyramidPlunderUrns()
+	default boolean pyramidPlunderSnakeCheck()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "pyramidPlunderSnakeCharm",
+			name = "Pyramid Plunder Charm Snake",
+			description = "Change the Urn left-click option to Charm Snake.",
+			section = objectSection
+	)
+	default boolean pyramidPlunderSnakeCharm()
 	{
 		return false;
 	}
 }
-

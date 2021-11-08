@@ -146,7 +146,8 @@ public class MenuSwapperPlugin extends Plugin
 		swap("look-at", "continue-trek", config::templeTrekkking);
 		swap("look at", "snow", config::snowSnowglobe);
 		swap("activate", "use", config::tobCrystal);
-		swap("search", "urn", "check for snakes", config::pyramidPlunderUrns);
+		swap("search", "urn", "check for snakes", config::pyramidPlunderSnakeCheck);
+		swap("search", "urn", "charm snake", config::pyramidPlunderSnakeCharm);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
