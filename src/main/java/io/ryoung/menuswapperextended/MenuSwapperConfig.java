@@ -423,5 +423,16 @@ public interface MenuSwapperConfig extends Config
 	{
 		return NMZBarrelMode.CHECK;
 	}
+
+	@ConfigItem(
+			keyName = "pyramidPlunderUrns",
+			name = "Pyramid Plunder Urns",
+			description = "Change the left-click option to Check for Snakes.",
+			section = objectSection
+	)
+	default boolean pyramidPlunderUrns()
+	{
+		return false;
+	}
 }
 
