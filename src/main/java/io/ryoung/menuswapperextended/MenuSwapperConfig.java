@@ -216,6 +216,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "emptyTacklebox",
+		name = "Tackle box",
+		description = "Change the left-click option to Empty on Tackle box",
+		section = itemSection
+	)
+	default TackleBoxMode emptyTacklebox()
+	{
+		return TackleBoxMode.EMPTY;
+	}
+
+	@ConfigItem(
 		keyName = "swapTraderCrewmemberLeftClick",
 		name = "Charter Ships",
 		description = "Change the left-click option on Trader Crewmembers on Charter ships",
