@@ -34,7 +34,8 @@ public enum DrakansMedallionMode implements SwapMode
 {
 	WEAR("Wear"),
 	VER_SINHAZA("Ver Sinhaza"),
-	DARKMEYER("Darkmeyer");
+	DARKMEYER("Darkmeyer"),
+	SLEPE("Slepe");
 
 	private final String option;
 
