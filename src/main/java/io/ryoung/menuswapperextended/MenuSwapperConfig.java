@@ -423,5 +423,25 @@ public interface MenuSwapperConfig extends Config
 	{
 		return NMZBarrelMode.CHECK;
 	}
+
+	@ConfigItem(
+		keyName = "kazgar",
+		name = "Kazgar",
+		description = "Change the left click option for NPC Kazgar",
+		section = npcSection
+	)
+	default KazgarMode swapKazgar() {
+		return KazgarMode.TALK;
+	}
+
+	@ConfigItem(
+		keyName = "mistag",
+		name = "Mistag",
+		description = "Change the left click option for NPC Mistag",
+		section = npcSection
+	)
+	default MistagMode swapMistag() {
+		return MistagMode.TALK;
+	}
 }
 

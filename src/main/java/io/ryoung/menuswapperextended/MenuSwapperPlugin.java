@@ -119,6 +119,8 @@ public class MenuSwapperPlugin extends Plugin
 
 		swapMode("talk-to", ZahurMode.class, config::swapZahur);
 		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
+		swapMode("talk-to", KazgarMode.class, config::swapKazgar);
+		swapMode("talk-to", MistagMode.class, config::swapMistag);
 
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
