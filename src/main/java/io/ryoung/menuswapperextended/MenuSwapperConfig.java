@@ -304,6 +304,17 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
+		keyName = "swapCoalBag",
+		name = "Coal bag",
+		description = "Change the fill with empty left-click option on the coal bag",
+		section = itemSection
+	)
+	default CoalBagSwap swapCoalBag()
+	{
+		return CoalBagSwap.FILL;
+	}
+
+	@ConfigItem(
 		keyName = "castBloom",
 		name = "Cast Bloom",
 		description = "Change the left click option to Cast Bloom for sickles and flails.",
