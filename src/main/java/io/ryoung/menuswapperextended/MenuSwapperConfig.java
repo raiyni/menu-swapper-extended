@@ -194,28 +194,6 @@ public interface MenuSwapperConfig extends Config
 	}
 
 	@ConfigItem(
-		keyName = "swapKaramjaGlovesLeftClick",
-		name = "Karamja Gloves",
-		description = "Change the left-click option on Karamja Gloves",
-		section = itemSection
-	)
-	default KaramjaGlovesMode swapKaramjaGlovesLeftClick()
-	{
-		return KaramjaGlovesMode.WEAR;
-	}
-
-	@ConfigItem(
-		keyName = "swapConsCape",
-		name = "Construction Cape",
-		description = "Change the left-click option on Construction Cape",
-		section = itemSection
-	)
-	default boolean swapConsCape()
-	{
-		return false;
-	}
-
-	@ConfigItem(
 		keyName = "swapTeleCrystal",
 		name = "Teleport Crystal",
 		description = "Swaps the Crystal Seed Teleport to Prifddinas",
@@ -235,39 +213,6 @@ public interface MenuSwapperConfig extends Config
 	default PharaohSceptreMode swapPharaohSceptreLeftClick()
 	{
 		return PharaohSceptreMode.JALSAVRAH;
-	}
-
-	@ConfigItem(
-		keyName = "swapDesertAmuletLeftClick",
-		name = "Desert Amulet",
-		description = "Change the left-click option on Desert Amulet",
-		section = itemSection
-	)
-	default DesertAmuletMode swapDesertAmuletLeftClick()
-	{
-		return DesertAmuletMode.WEAR;
-	}
-
-	@ConfigItem(
-		keyName = "swapMorytaniaLegsLeftClick",
-		name = "Morytania Legs",
-		description = "Change the left-click option on Morytania Legs",
-		section = itemSection
-	)
-	default MorytaniaLegsMode swapMorytaniaLegsLeftClick()
-	{
-		return MorytaniaLegsMode.WEAR;
-	}
-
-	@ConfigItem(
-		keyName = "swapArdougneCloakLeftClick",
-		name = "Ardougne Cloak",
-		description = "Change the left-click option on Ardougne Cloak",
-		section = itemSection
-	)
-	default ArdougneCloakMode swapArdougneCloakLeftClick()
-	{
-		return ArdougneCloakMode.WEAR;
 	}
 
 	@ConfigItem(
@@ -361,7 +306,7 @@ public interface MenuSwapperConfig extends Config
 	@ConfigItem(
 		keyName = "castBloom",
 		name = "Cast Bloom",
-		description = "Change the left click option to Cast Bloom for sickles.",
+		description = "Change the left click option to Cast Bloom for sickles and flails.",
 		section = itemSection
 	)
 	default boolean castBloom()
@@ -376,6 +321,17 @@ public interface MenuSwapperConfig extends Config
 		section = itemSection
 	)
 	default boolean snowSnowglobe()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "tobCrystal",
+			name = "Verzik's Crystal Shard",
+			description = "Change the left click option to Use for Verzik's Crystal Shard.",
+			section = itemSection
+	)
+	default boolean tobCrystal()
 	{
 		return false;
 	}
@@ -467,5 +423,26 @@ public interface MenuSwapperConfig extends Config
 	{
 		return NMZBarrelMode.CHECK;
 	}
-}
 
+	@ConfigItem(
+			keyName = "pyramidPlunderSnakeCheck",
+			name = "Pyramid Plunder Check for Snake",
+			description = "Change the Urn left-click option to Check for Snakes.",
+			section = objectSection
+	)
+	default boolean pyramidPlunderSnakeCheck()
+	{
+		return false;
+	}
+
+	@ConfigItem(
+			keyName = "pyramidPlunderSnakeCharm",
+			name = "Pyramid Plunder Charm Snake",
+			description = "Change the Urn left-click option to Charm Snake.",
+			section = objectSection
+	)
+	default boolean pyramidPlunderSnakeCharm()
+	{
+		return false;
+	}
+}

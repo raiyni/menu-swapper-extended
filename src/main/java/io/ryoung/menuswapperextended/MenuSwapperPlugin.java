@@ -110,27 +110,22 @@ public class MenuSwapperPlugin extends Plugin
 		swap("talk-to", "join", config::swapMinigames);
 		swap("talk-to", "join-crew", config::swapMinigames);
 		swap("talk-to", "priestess zul-gwenwynig", "collect", config::swapZulrahCollect);
-		swap("talk-to", "rantz","collect", config::collectRantz);
+		swap("talk-to", "rantz","claim-arrows", config::collectRantz);
 		swap("talk-to", "trade-builders-store", config::swapStore);
 		swap("talk-to", "give-sword", config::swapGiveSword);
 		swap("talk-to", "spellbook", config::swapTyssSpellbook);
 		swap("talk-to", "sand", config::sandBert);
-		swap("talk-to", "Kitten", config::kittenGertrude);
+		swap("talk-to", "kitten", config::kittenGertrude);
 
 		swapMode("talk-to", ZahurMode.class, config::swapZahur);
 		swapMode("talk-to", CharterShipsMode.class, config::swapTraderCrewmemberLeftClick);
 
-		swap("wear", "tele to poh", () -> !shiftModifier() && config.swapConsCape());
-
-		swapMode("wear", KaramjaGlovesMode.class, config::swapKaramjaGlovesLeftClick);
-		swapMode("wear", DesertAmuletMode.class, config::swapDesertAmuletLeftClick);
-		swapMode("wear", MorytaniaLegsMode.class, config::swapMorytaniaLegsLeftClick);
-		swapMode("wear", ArdougneCloakMode.class, config::swapArdougneCloakLeftClick);
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
 		swapMode("wear", MythicalCapeMode.class, config::swapMythicalCapeLeftClick);
 		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
 		swap("wield", "cast bloom", config::castBloom);
+		swap("wield", "bloom", config::castBloom);
 		swapMode("activate", ObeliskMode.class, config::swapTeleportToDestination);
 		swapMode("check", NMZBarrelMode.class, config::swapNMZBarrelLeftClick);
 		swap("ardougne", "edgeville", config::swapWildernessLever);
@@ -150,6 +145,9 @@ public class MenuSwapperPlugin extends Plugin
 		swap("wield", "reminisce", config::kharedstsMemoirs);
 		swap("look-at", "continue-trek", config::templeTrekkking);
 		swap("look at", "snow", config::snowSnowglobe);
+		swap("activate", "use", config::tobCrystal);
+		swap("search", "urn", "check for snakes", config::pyramidPlunderSnakeCheck);
+		swap("search", "urn", "charm snake", config::pyramidPlunderSnakeCharm);
 	}
 
 	private <T extends Enum<?> & SwapMode> void swapMode(String option, Class<T> mode, Supplier<T> enumGet)
