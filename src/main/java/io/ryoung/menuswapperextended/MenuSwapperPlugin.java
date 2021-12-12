@@ -189,7 +189,7 @@ public class MenuSwapperPlugin extends Plugin
 	private void swapMenuEntry(int index, MenuEntry menuEntry)
 	{
 		final int eventId = menuEntry.getIdentifier();
-		final MenuAction menuAction = MenuAction.of(menuEntry.getType());
+		final MenuAction menuAction = menuEntry.getType();
 		final String option = Text.removeTags(menuEntry.getOption()).toLowerCase();
 		final String target = Text.removeTags(menuEntry.getTarget()).toLowerCase();
 		final NPC hintArrowNpc = client.getHintArrowNpc();
