@@ -357,6 +357,17 @@ public interface MenuSwapperConfig extends Config
 	{
 		return MythicalCapeMode.WEAR;
 	}
+	
+	@ConfigItem(
+		keyName = "swapHouseTabletLeftClick",
+		name = "Teleport to house",
+		description = "Change the left-click option on Teleport to house tablet",
+		section = itemSection
+	)
+	default HomeTeleportTabletMode swapHouseTabletLeftClick()
+	{
+		return HomeTeleportTabletMode.BREAK;
+	}
 
 	@ConfigItem(
 		keyName = "privateKBD",
