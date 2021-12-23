@@ -125,7 +125,7 @@ public class MenuSwapperPlugin extends Plugin
 		swapMode("wear", DrakansMedallionMode.class, config::swapDrakansMedallionLeftClick);
 		swapMode("wear", FremennikSeaBootsMode.class, config::swapFremennikSeaBootsLeftClick);
 		swapMode("wear", MythicalCapeMode.class, config::swapMythicalCapeLeftClick);
-		swapMode("break", HouseTeleportTabletMode.class, config::swapHouseTabletLeftClick);
+		swapMode("break", HomeTeleportTabletMode.class, config::swapHouseTabletLeftClick);
 		swapMode("wield", PharaohSceptreMode.class, config::swapPharaohSceptreLeftClick);
 		swap("wield", "cast bloom", config::castBloom);
 		swap("wield", "bloom", config::castBloom);
